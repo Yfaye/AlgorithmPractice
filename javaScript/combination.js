@@ -31,7 +31,7 @@ var combine = function(n, k) {
 	var path = [];
 
 	//dfs function
-	var dfsHelper = function(n, k, results, path, prev) {
+	var dfsHelper = function(n, k, results, path, pos) {
 		//base case
 		if (k === 0) {
 			results.push(path.slice(0));
@@ -39,32 +39,20 @@ var combine = function(n, k) {
 		}
 		
 		//recursive case
-		for (var i = n; i >= 1; i--) {
-			//pruning
-			if ( i >= prev) {
-				continue;
-			}
+		for (var i = pos; i <= n; i++) {
 			path.push(i);
-			dfsHelper (n - 1, k - 1, results, path, i);
+			dfsHelper (n, k - 1, results, path, i+1);
 			path.pop(path.length - 1);
 		}
 	}
 
-	dfsHelper(n, k, results, path);
+	dfsHelper(n, k, results, path, 1);
 	console.table(results);
 	return results;    
 };
 
 combine(4,2);
+
 /*
-4,3,4,2,4,1,3,3,3,2,3,1,2,3,2,2,2,1,1,3,1,2,1,1
-*/
-/*
-4,3,4,2,4,1
-*/
-/*
-2,3,1,3,1,2
-*/
-/*
-2,3,1,3,1,2
+1,2,1,3,1,4,2,3,2,4,3,4
 */
