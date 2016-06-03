@@ -24,6 +24,8 @@ word = "ABCB", -> returns false.
  * @return {boolean}
  */
 var exist = function(board, word) {
+  var dx = [-1, 0, 1, 0];
+  var dy = [0, -1, 0, 1];
   
   var inRange = function(x,y){
     if (x < 0  || y < 0|| y >= board.length || x >= board[0].length) {
@@ -49,33 +51,30 @@ var exist = function(board, word) {
   	}
     
   	//recursive case: check neighboring cell
-    var tmp = board[y][x];
-    board[y][x] = '#';
-    var result = hasWord(x-1, y, board, wordstr.substring(1)) ||
-                 hasWord(x, y-1, board, wordstr.substring(1)) ||
-                 hasWord(x+1, y, board, wordstr.substring(1)) ||
-                 hasWord(x, y+1, board, wordstr.substring(1));
-    board[y][x] = tmp;
-    return result;
+  	for (var direction = 0; direction < 4; ++direction) {
+  		var nextX = x + dx[direction];
+  		var nextY = y + dy[direction];
+      if (hasWord(nextX, nextY, board, wordstr.substring(1))) {
+          return true;
+      }
+  		//return false; /*This is the mistake 1 I made*/
+  	}
+   return false;
   };
   
-  for (var u = 0; u < board[0].length; u++) {
-    for (var v = 0; v < board.length; v++) {
-      var result = hasWord(u, v, board, word);
-      if (result === true) {
-        return result;
+  for (var v = 0; v < board.length; v++) {
+    for (var u = 0; u < board[0].length; u++) {
+      if(hasWord(u, v, board, word)){
+        return true;
       }
     }
   }
- return result;
+  return false;
 };
 var result = exist([
                       ['A','B','C','E'],
                       ['S','F','C','S'],
                       ['A','D','E','E']
-                    ], 'SEE');
+                    ], 'SEEEE');
 
 console.log(result);
-/*
-undefined
-*/
