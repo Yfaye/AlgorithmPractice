@@ -11,49 +11,57 @@ The brackets must close in the correct order, "()" and "()[]{}" are all valid bu
  * @return {boolean}
  */
 var isValid = function(s) {
-	//corner case
-	if (s === undefined) {
-		return false;
-	}
-	var sLen = s.length;
-	if (sLen === 0 || s.charAt(0) === ')' || s.charAt(0) === '}' || s.charAt(0) === ']') {
-		return false;
-	}
-
-	var stack = [];
-	stack.push(s.charAt(0));
-	for (var i = 1; i < sLen; i++) {
-		console.log(stack);
-		if (s.charAt(i) === '(' || s.charAt(i) === '{' || s.charAt(i) === '[' ) {
-			stack.push(s.charAt(i));
-		}
-		if (s.charAt(i) === ')' && stack.length !== 0 ){
-			if (stack[stack.length - 1] === '(') {
-				stack.pop();
-			} else {
-				stack.push(s.charAt(i));
-			}
-			
-		}
-		if (s.charAt(i) === '}' && stack.length !== 0 && stack[stack.length - 1] === '{' ){
-			stack.pop();
-		}
-		if (s.charAt(i) === ']' && stack.length !== 0 && stack[stack.length - 1] === '[' ){
-			stack.pop();
-		}
-		console.log(stack);
-	}
-	if (stack.length !== 0) {
-		return false;
-	} else {
-		return true;
-	}   
+    //corner case
+    if (s === undefined) {
+        return false;
+    }
+    var sLen = s.length;
+    if (sLen === 0) {
+        return true;
+    }
+    if (s.charAt(0) === ')' || s.charAt(0) === '}' || s.charAt(0) === ']' ) {
+        return false;
+    }
+    
+    //check
+    var stack = [];
+    stack.push(s.charAt(0));
+    
+    for (var i = 1; i < sLen; i++) {
+        if (stack.length === 0 &&　(s.charAt(i) === ')' || s.charAt(i) === '}' || s.charAt(i) === ']')) {
+            return false;
+        }
+        if (s.charAt(i) === '(' || s.charAt(i) === '{' || s.charAt(i) === '[' ) {
+            stack.push(s.charAt(i));
+        }
+        if (s.charAt(i) === ')' && stack.length > 0) {
+            if (stack[stack.length - 1] === '(' ) {
+                stack.pop();
+            } else {
+                return false;
+            }
+        }
+        if (s.charAt(i) === '}' && stack.length > 0) {
+            if (stack[stack.length - 1] === '{' ) {
+                stack.pop();
+            } else {
+                return false;
+            }
+        }
+        if (s.charAt(i) === ']' && stack.length > 0) {
+            if (stack[stack.length - 1] === '[' ) {
+                stack.pop();
+            } else {
+                return false;
+            }
+        }
+    }
+    
+    if (stack.length > 0) {
+        return false;
+    } else {
+        return true;
+    }
 };
 
-isValid("(])");
-/*
-false
-*/
-/*
-true
-*/
+isValid("[])");
