@@ -21,11 +21,23 @@ var longestCommonPrefix = function(strs) {
     		head.push(strs[i].charAt(0));
     	}
     }
-    if (head.length >= strs.length) {
+    if (head.length > 1) {
     	return lcp;
     }
-    
-    
-
-    
+    lcp = lcp + head[0];
+    for (var m = 1; m < shortest; m++) {
+    	for (var n = 0; n < strs.length - 1; n++) {
+    		if (strs[n].charAt(m) !== strs[n+1].charAt(m)) {
+    			return lcp;
+    		}
+    	}
+    	lcp = lcp + strs[0].charAt(m);
+    }
+    return lcp;   
 };
+
+longestCommonPrefix(['aabb','aabbc','aabbccd']);
+
+/*
+aabb
+*/
