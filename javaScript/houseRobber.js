@@ -12,6 +12,45 @@ Special thanks to @ifanchu for adding this problem and creating all test cases. 
  * @param {number[]} nums
  * @return {number}
  */
+// The code below would give wrong answer due to wrong initialization at line 21;
+ /*
 var rob = function(nums) {
-    
+	var cache = [];
+	var max = 0;
+	cache[0] = nums[0];
+	cache[1] = nums[1];
+	for (var i = 2; i < nums.length; i++) {
+		cache[i] = Math.max((nums[i] + cache[i-2]),cache[i-1]);
+	}
+	for (var j = 0; j < cache.length; j++) {
+		if (cache[j] >= max) {
+			max = cache[j];
+		}
+	}
+	return max;        
 };
+
+rob([2,1,1,2]); //3
+*/
+
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var rob = function(nums) {
+    var cache = [];
+	var max = 0;
+	cache[0] = nums[0];
+	cache[1] = Math.max(nums[1],cache[0]);
+	for (var i = 2; i < nums.length; i++) {
+		cache[i] = Math.max((nums[i] + cache[i-2]),cache[i-1]);
+	}
+	for (var j = 0; j < cache.length; j++) {
+		if (cache[j] >= max) {
+			max = cache[j];
+		}
+	}
+	return max;     
+};
+rob([2,1,1,2]); //4
