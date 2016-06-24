@@ -23,10 +23,58 @@ transactions = [buy, sell, cooldown, buy, sell]
 	最后一个cooldown发生的位置，以及这些个位置下产生的最大利润。（最后一个cooldown之前的所有利润 + 这个cooldown之后的买卖所能产生的利润 ）
 	然后再从前往后把最后一个cooldown的每个位置扫一遍，这样就能知道最终的最大利润是在哪里了。
 */
+var maxProfit = function(prices) {
+	//corner case
+	if (prices === undefined || prices.length < 2) {
+		return 0;
+	}
+
+	//init profit grid
+	var singleTradeProfit = [];
+	for (var i = 0; i < prices.length - 1; i++) {
+		for (var j = i + 1; j < prices.length; j++) {
+			singleTradeProfit[i] = []; //如果没有这句，程序会报错:Exception: TypeError: singleTradeProfit[i] is undefined
+			singleTradeProfit[i][j] = prices[j] - prices[i];
+			console.log('singleTradeProfit' + '[' + i + ']' + '[' + j + ']' + 'is: ' + singleTradeProfit[i][j] );
+		}
+	}
+
+	var profitBeforeLastCooldown = []; // recording maxProfit before certain position i in Prices so length should be 1 more than prices.length;
+	profitBeforeLastCooldown[0] = 0;
+	profitBeforeLastCooldown[1] = 0;
+
+	for (var k = 2; k <= prices.length; k++) {
+		var curMaxProfit = 0;
+		var index = 0;
+		while (index < k) {
+			var m = 0;
+			for (; m < k-1; m++) {
+				if (profitBeforeLastCooldown[index] + singleTradeProfit[m][k-1] >= curMaxProfit) {
+				  curMaxProfit = profitBeforeLastCooldown[index] + singleTradeProfit[m][k-1];
+					console.log('singleTradeProfit['+ m + ']['+ (k-1)+'] is: ' + singleTradeProfit[m][k-1]);
+			  }			
+			}
+			index++;
+		}
+		profitBeforeLastCooldown[k] = curMaxProfit;
+		console.log('profitBeforeLastCooldown[' + k + '] is ' + profitBeforeLastCooldown[k] );
+	}
+
+	var max = 0;
+	for (var n = 0; n <profitBeforeLastCooldown.length; n++ ) {
+		if (profitBeforeLastCooldown[n] >= max) {
+			max = profitBeforeLastCooldown[n];
+		}
+	}
+
+	return max;
+}
+
+
 /*思路二： 还是网上看来的答案， 每一天其实有三个状态，买，卖，闲。 闲的状态不用考虑，已经自动在买卖需发生在前一天里面考虑了i-1
   而考虑每一天的最大利润时，其实就是这一天 我买 (pre_sell - price[i]) 或者 不买 （pre_sell）还是 卖 （pre_buy + price[i]）或者不卖 （pre_buy）.
   然后从头走到尾，找最大利润
-  */
+
 
 var maxProfit = function(prices) {
 	//corner case
@@ -47,10 +95,58 @@ var maxProfit = function(prices) {
   return sell;
 };
 
+maxProfit([1, 2, 3, 0, 2]);  */
 maxProfit([1, 2, 3, 0, 2]);
 /*
-4
+Exception: SyntaxError: illegal character
+@Scratchpad/1:36
 */
 /*
-4
+Exception: TypeError: singleTradeProfit[i] is undefined
+maxProfit@Scratchpad/1:37:4
+@Scratchpad/1:93:1
+*/
+/*
+Exception: TypeError: singleTradeProfit[index] is undefined
+maxProfit@Scratchpad/1:49:1
+@Scratchpad/1:93:1
+*/
+/*
+Exception: TypeError: singleTradeProfit[index] is undefined
+maxProfit@Scratchpad/1:50:1
+@Scratchpad/1:94:1
+*/
+/*
+Exception: TypeError: singleTradeProfit[index] is undefined
+maxProfit@Scratchpad/1:51:4
+@Scratchpad/1:96:1
+*/
+/*
+Exception: TypeError: singleTradeProfit[index] is undefined
+maxProfit@Scratchpad/1:51:4
+@Scratchpad/1:96:1
+*/
+/*
+Exception: TypeError: singleTradeProfit[index] is undefined
+maxProfit@Scratchpad/1:51:4
+@Scratchpad/1:96:1
+*/
+/*
+Exception: TypeError: singleTradeProfit[(k - 1)] is undefined
+maxProfit@Scratchpad/1:52:4
+@Scratchpad/1:97:1
+*/
+/*
+Exception: TypeError: singleTradeProfit[index] is undefined
+maxProfit@Scratchpad/1:51:4
+@Scratchpad/1:96:1
+*/
+/*
+2
+*/
+/*
+2
+*/
+/*
+2
 */
