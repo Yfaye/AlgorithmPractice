@@ -32,10 +32,18 @@ var maxProfit = function(prices) {
 	//init profit grid
 	var singleTradeProfit = [];
 	for (var i = 0; i < prices.length - 1; i++) {
+		singleTradeProfit[i] = []; //如果没有这句，程序会报错:Exception: TypeError: singleTradeProfit[i] is undefined
 		for (var j = i + 1; j < prices.length; j++) {
-			singleTradeProfit[i] = []; //如果没有这句，程序会报错:Exception: TypeError: singleTradeProfit[i] is undefined
+			//singleTradeProfit[i] = []; //如果没有这句，程序会报错:Exception: TypeError: singleTradeProfit[i] is undefined
 			singleTradeProfit[i][j] = prices[j] - prices[i];
-			console.log('singleTradeProfit' + '[' + i + ']' + '[' + j + ']' + 'is: ' + singleTradeProfit[i][j] );
+			//console.log('singleTradeProfit' + '[' + i + ']' + '[' + j + ']' + 'is: ' + singleTradeProfit[i][j] );
+		}
+	}
+	
+	//print array 
+	for (var row = 0; row < singleTradeProfit.length; row++) {
+		for (var col = 0; col < singleTradeProfit[row].length; col++) {
+			//console.log('singleTradeProfit' + '[' + row + ']' + '[' + col + ']' + 'is: ' + singleTradeProfit[row][col] );
 		}
 	}
 
@@ -47,11 +55,16 @@ var maxProfit = function(prices) {
 		var curMaxProfit = 0;
 		var index = 0;
 		while (index < k) {
+			//console.log('enter while loop ' + 'index now is ' + index + ' k now is ' + k);
 			var m = 0;
-			for (; m < k-1; m++) {
-				if (profitBeforeLastCooldown[index] + singleTradeProfit[m][k-1] >= curMaxProfit) {
-				  curMaxProfit = profitBeforeLastCooldown[index] + singleTradeProfit[m][k-1];
-					console.log('singleTradeProfit['+ m + ']['+ (k-1)+'] is: ' + singleTradeProfit[m][k-1]);
+			for (; m < k-2; m++) {
+				//console.log('enter for loop '+'m now is ' + m + ' k now is ' + k);
+				//console.log(profitBeforeLastCooldown[index] + '  ' + singleTradeProfit[m][k-1]);
+				if (profitBeforeLastCooldown[index] + singleTradeProfit[m][k-2] >= curMaxProfit) {
+				  curMaxProfit = profitBeforeLastCooldown[index] + singleTradeProfit[m][k-2];
+					//console.log('singleTradeProfit['+ m + ']['+ (k-1)+'] is: ' + singleTradeProfit[m][k-1]);
+					console.log("profitBeforeLastCooldown[index] is " + profitBeforeLastCooldown[index]);
+					console.log("m is " + m + "k is " + k + "singleTradeProfit[m][k-2] is " + singleTradeProfit[m][k-2] );
 			  }			
 			}
 			index++;
@@ -149,4 +162,62 @@ maxProfit@Scratchpad/1:51:4
 */
 /*
 2
+*/
+/*
+2
+*/
+/*
+2
+*/
+/*
+Exception: SyntaxError: missing ) after argument list
+@Scratchpad/1:50
+*/
+/*
+Exception: SyntaxError: missing ) after argument list
+@Scratchpad/1:50
+*/
+/*
+2
+*/
+/*
+2
+*/
+/*
+2
+*/
+/*
+2
+*/
+/*
+undefined
+*/
+/*
+2
+*/
+/*
+5
+*/
+/*
+5
+*/
+/*
+5
+*/
+/*
+5
+*/
+/*
+Exception: SyntaxError: missing ) in parenthetical
+@Scratchpad/3:67
+*/
+/*
+Exception: SyntaxError: missing ) after argument list
+@Scratchpad/3:67
+*/
+/*
+5
+*/
+/*
+3
 */
