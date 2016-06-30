@@ -11,5 +11,45 @@ Design an algorithm to find the maximum profit. You may complete as many transac
  * @return {number}
  */
 var maxProfit = function(prices) {
-    
+	//corner case
+	if (prices === null || prices.length < 2) {
+		return 0;
+	}
+
+	//init
+	var preBuyMaxProfit = 0;
+    var preSellMaxProfit = 0;
+    var buy = -prices[0];
+    var sell = 0;
+
+    for (var i = 0; i < prices.length; i++) {
+    	preBuyMaxProfit = buy;
+    	buy = Math.max(preBuyMaxProfit, preSellMaxProfit - prices[i]);
+    	sell = Math.max(preSellMaxProfit, preBuyMaxProfit + prices[i]);
+    	preSellMaxProfit = sell;
+        console.log("preBuy is " + preBuyMaxProfit);
+        console.log("preSell is " + preSellMaxProfit);
+        console.log("buy is " + buy);
+        console.log("sell is " + sell);
+    }
+
+    return sell > buy ? sell : buy;
 };
+
+maxProfit([1,2,3,0,2]);
+
+/*
+5
+*/
+/*
+5
+*/
+/*
+3
+*/
+/*
+3
+*/
+/*
+4
+*/
