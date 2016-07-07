@@ -18,7 +18,7 @@ Follow up: Could you improve it to O(n log n) time complexity?
 // 问题的解： 一个值，子序列的最大长度
 // 目标函数： 
 // 状态转移函数： f(k+1) = f(k) + 1 // if (nums[k] > tail) // 记得tail也要更新
-// 状态和转移函数都考虑错了，这只考虑了从nums[0]起步的情况，如果是从nums[1]起步呢？所以应该是每个位置开头的subsequence都考虑一遍，这样复杂度就是O(n2).....
+// 状态和转移函数都考虑错了，这只考虑了从nums[0]起步的情况，如果是从nums[1]起步呢？所以应该是每个位置开头的subsequence都考虑一遍，这样复杂度就是O(n2)。哦，题目说O(n2)是可以的
 // 这个逻辑似乎还是有问题……
 
 var lengthOfLIS = function(nums) {
