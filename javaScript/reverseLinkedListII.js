@@ -42,17 +42,25 @@ var reverseBetween = function(head, m, n) {
     	counter++;
     }
 	var PreM = head; // record preM;
+    var PostN = null; // set PostN;
+    var reversedHead = head ; 
+    reversedHead.next = PostN; //Set End of Reversed List;
+    head = head.next; // set head start from M;
+    counter++;
+
 
     //reverse M-N
-    while(head.next.next !== null && counter < n) {
-    	var tmp = head.next.next;
-    	head.next.next = head;
+    while(head !== null && counter < n) {
+    	var tmp = head.next;
+    	head.next = reversedHead;
+        reversedHead = head;
     	head = tmp;
     	counter++;
     }
 
-    PreM.next.next = head.next;
-    PreM.next = head;
+    // set 
+    PreM.next = reversedHead;
+    PostN = head.next;
 
     return dummy.next;
 

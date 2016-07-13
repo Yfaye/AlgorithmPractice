@@ -38,3 +38,24 @@ var reverseList = function(head) {
     return prev;
     
 };
+
+var reverseList = function(head) {
+    //corner case
+    if (head === null || head.next === null) {
+        return head;
+    }
+    
+    var reversedHead = null;
+    
+    while (head !== null) {
+        var tmp = head.next;
+        head.next = reversedHead;
+        reversedHead = head;
+        head = tmp;
+    }
+    
+    return reversedHead;
+};
+
+// 这题还想着用尾插法，如果用尾插法，就是复制本linked list，而不是reverse了。
+// 要reverse，要考虑用头插法，这样每读来的一个node，就头插在前面，都读完，然后自然就是最后读的插在了新链的最前头，reverse了
