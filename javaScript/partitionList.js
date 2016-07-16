@@ -23,29 +23,40 @@ return 1->2->2->4->3->5.
  * @return {ListNode}
  */
 var partition = function(head, x) {
-	//corner case
-	if(head === null || head.next === null) {
-		return head;
-	}
+    //corner case
+    if(head === null || head.next === null) {
+        return head;
+    }
     
-    var dummy = new ListNode(-1);
+    var dummy = new ListNode(-99999999);
     dummy.next = head;
     head = dummy;
 
-    var greater = new ListNode(-1);
-
+    var greaterHead = new ListNode(-999999); // if set val to -1, won't pass case with partition([1,2,3,4,5,6,7], -1), although AC, this bug still exists
+    var greater = greaterHead;
     while (head.next !== null) {
-    	if (head.next.val >= x) {
-    		greater.next = head.next;
-    		greater = greater.next;
-    		head.next = head.next.next;
-    	}
-    	head = head.next;
+        if (head.next.val >= x) {
+            greater.next = head.next;
+            greater = greater.next;
+            var pre = head.next;
+            head.next = head.next.next;
+        } else {
+            pre = head;
+            head = head.next;       
+        }
     }
-    greater.next = null;
-    head.next = greater.next;
-
-    return dummy.next;
+    
+    // while loop stopped at last node, so need to judge last node
+    if (head.val >= x) {
+        greater.next = head;
+        greater.next.next = null;
+        pre.next = greaterHead.next;
+    } else {
+        greater.next = null;       
+        head.next = greaterHead.next;    
+    }
+    
+    return dummy.next;  
 }; 
 
 //此题第一想法，头结点会改变，要设dummy节点

@@ -24,17 +24,23 @@ Your algorithm should use only constant space. You may not modify the values in 
 var swapPairs = function(head) {
     //corner case
     if (head === null || head.next === null) {
-    	return head;
+        return head;
     }
 
     var dummy = new ListNode(-1);
     dummy.next = head;
+    head = dummy; // debug 1, 设dummy node少了这一步。
 
-    var runner = dummy;
-    while (runner !== null && runner.next !== null) {
-    	var tmp =runner.next.next;
-    	runner.next.next = runner;
-    	runner.next = tmp;
-    	runner = tmp;
+    while (head !== null && head.next !== null && head.next.next !== null) { //debug 2 之前没有加最后一个判断，导致奇数个node的时候判断失误
+        var pairStart =head.next;
+        var nextPairStart = head.next.next.next;
+        head.next = head.next.next;
+        head.next.next = pairStart;
+        pairStart.next = nextPairStart;
+        head = head.next.next;
     }
+
+    return dummy.next;
 };
+
+// 这里由于设立了dummy node，而且每步swap，也需要记录这对pair的前面节点的信息，所以实际循环是从原始head前面开始run的，而每步需要保证是一个pair的话，必须要head.next !== null && head.next.next !== null
