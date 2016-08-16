@@ -132,3 +132,32 @@ var buildTree = function(preorder, inorder) {
 
     return r;
 };
+
+
+// 想了想，觉得自己的code各种完美，怎么MLE呢，后来还是懒，跑去网上看人家的答案，才发现一个明显的地方，我根本不用生成新数组，我只需要index。这样就不能用Divide and Conquer来做了，考虑DFS
+
+// 网上python的也有很多MLE的case，看到一个过来人的解释，很有道理，贴在下面：
+// You made two new lists as parameters in each recursive call, which required a lot of memory. You can try to pass in the original lists together with the correct indices.
+// 网上看见下面这个js的代码，简直想打自己一顿
+var buildTree = function(preorder, inorder) {
+
+    return build(0, inorder.length - 1);
+    
+    function build(l, r) {
+        if (l > r) {
+            return null;
+        }
+        
+        var v = preorder.shift();
+        var i = inorder.indexOf(v);
+        var root = new TreeNode(v);
+        
+        root.left = build(l, i - 1);
+        root.right = build(i + 1, r);
+        
+        return root;
+    }
+
+}
+
+// 这一题的最大收获是, 递归的时候新建数组容易造成很大的memory开销，最好的方式是传index进去。看看从中序和后序建树的题中，能不能实践这一方案
