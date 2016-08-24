@@ -26,8 +26,10 @@ var isValidSudoku = function(board) {
 			if (rowSet.has(board[row][i]) || board[row][i] < 1 || board[row][i] > 9) {
 				return false;
 			}
-			if (board[row][i] !== '.')
-			rowSet.add(board[row][i]);
+			if (board[row][i] !== '.') {
+				rowSet.add(board[row][i]);			
+			}
+
 		}
 	}
 
