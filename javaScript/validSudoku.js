@@ -72,3 +72,73 @@ var isValidSudoku = function(board) {
 	}
 	return true;   
 };
+
+// 上面的题，连续debug了好几次，踩了两大巨坑，终于AC了，下面是AC的代码， 太丑，而且心已累，明天再来想优化
+
+var isValidSudoku = function(board) {
+	var totalRow = board.length;
+	var totalCol = board[0].length;
+
+	var checkOneRow = function(board, row){
+		var rowSet = new Set();
+		for (var i = 0; i < totalCol; i++) {
+			if (rowSet.has(board[row][i])|| parseInt(board[row][i]) < 1 || parseInt(board[row][i]) > 9) {
+				return false;
+			}
+			if (board[row][i] !== '.') {
+				rowSet.add(board[row][i]);			
+			}
+
+		}
+		return true;
+	}
+
+	var checkOneCol = function(board,col){
+		var colSet = new Set();
+		for (var j = 0; j < totalRow; j++) {
+			if (colSet.has(board[j][col]) || parseInt(board[j][col]) < 1 || parseInt(board[j][col]) > 9) {
+				return false;
+			}
+			if (board[j][col] !== '.') {
+				colSet.add(board[j][col]);
+			}
+		}
+		return true;
+	}
+
+	var checkOneSqare = function(board, startX, startY) {
+		var squareSet = new Set();
+		for (var r = 0; r < 3; r++) {
+			for (var c = 0; c < 3; c++) {
+			    //console.log(board[startX+r][startY+c]);
+				if (squareSet.has(board[startX+r][startY+c]) || parseInt(board[startX+r][startY+c]) < 1 || parseInt(board[startX+r][startY+c]) > 9) {
+					return false;
+				}
+				if (board[startX+r][startY+c] !== '.') {
+					squareSet.add(board[startX+r][startY+c]);
+				}
+			}
+		}
+		return true;
+	}
+	
+	for (var row = 0; row < totalRow; row++) {
+		if (!checkOneRow(board, row)){
+		    return false;
+		}
+	}
+
+	for (var col = 0; col < totalCol; col++) {
+	    if(!checkOneCol(board, col)){
+	        return false;
+	    }
+	}
+    for (var u = 0; u < totalRow-2; u+=3){
+        for (var v = 0; v < totalCol-2; v+=3){
+      	    if(!checkOneSqare(board, u, v)){
+    	        return false;
+    	    }          
+        }
+    }
+	return true;   
+};
