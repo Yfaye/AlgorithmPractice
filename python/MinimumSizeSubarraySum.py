@@ -59,4 +59,40 @@ class Solution:
 #[2,3,1,2,4,3]， 7 这里如果先移右边的3就会造成问题……这个算法还是有逻辑缺陷的，还没有想出来逻辑缺陷在哪里
 
 #看了看九章的答案，是先让right指针从左到右涨到总体和比target大的位置，然后再让left指针从左到右从总体和里面减去……还没有理解
+#终于看明白了人家聪明优秀的O(n)算法了，它实际上是要left和right组成一个弹性区间，这个弹性区间的sum总是>=target的（根据题意），然后这个区间总是right先挪，然后left跟着挪，记录这个区间长度最小的时候，即可
+#我想说，为什么聪明的办法都是别人想出来的！T_T
+
+class Solution:
+     # @param nums: a list of integers
+     # @param s: an integer
+     # @return: an integer representing the minimum size of subarray
+    def minimumSize(self, nums, s):
+        # write your code here
+        if len(nums) == 0:
+            return -1
+
+        n = len(nums)
+        total = 0
+        ans = n + 1 #这里写成n + 1， 是因为后面要取 right - left + 1  和 ans 的最小值，并且要判断是不是根本right走到头，left完全没动之后，也没有大到S
+        left = 0
+        right = 0
+
+        while right < n:
+            while (right < n && total < s):
+                total += nums[right]
+                right += 1
+            if total < s:
+                break  # 这里原来是 return -1， debug时改成break，因为不排除有情况，left-right区间走到了后半段，结果后半段加起来根本没有比s大的时候，这里return -1 就错了
+            while (left < right && total >= s):
+                total -= nums[left]
+                left += 1
+            ans = min(ans, right - left + 1)
+
+        if ans == n + 1:
+            return -1
+        else：
+            return ans  # 这里不能直接return ans 是因为如果right走到头，left完全没动，还比s小，这种情况下， ans的最小值是之前的初始值，而 right - left + 1 的值也是n - 0 + 1
+                        # 如果right走到头，total已经>=s了，这里无论如何left都会往右挪动一步，right - left + 1 的值就是 n - 1 + 1 = n
+
+
 
