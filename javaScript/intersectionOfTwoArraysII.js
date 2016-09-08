@@ -22,7 +22,7 @@ What if elements of nums2 are stored on disk, and the memory is limited such tha
  */
 var intersect = function(nums1, nums2) {
  	//corner case
-	if (nums1 === null || nums1.length === 0 || nums2 === null || nums2.length === 0) {
+	if (nums1 === null || nums1 === undefined || nums1.length === 0 || nums2 === null || nums2 === undefined || nums2.length === 0) {
 		return [];
 	}
 	
@@ -56,3 +56,50 @@ var intersect = function(nums1, nums2) {
 //var test = intersect([4,7,9,7,6,7],[5,0,0,6,1,6,2,2,4]);
 var test = intersect([1,2],[1,1,1]);
 console.log(test);
+
+//这题其实就是寻找nums1和nums2的公共元素，而且题目说了顺序不重要，所以其实是找两个集合的公共元素
+
+var intersect = function(nums1, nums2) {
+ 	//corner case
+	if (nums1 === null || nums1 === undefined || nums1.length === 0 || nums2 === null || nums2 === undefined || nums2.length === 0) {
+		return [];
+	}
+
+	//find longer and shorter
+	var len1 = nums1.length;
+	var len2 = nums2.length;
+	var result = [];
+		
+	var longer = len1 >= len2? nums1 : nums2;
+	var shorter = len1 < len2? nums1 : nums2;
+
+	//set hash for shorter
+	var hash = new Map();
+	var i = 0;
+	var count = 0;
+
+	for (i = 0; i < shorter.length; i++) {
+		if (!hash.has(shorter[i])){
+			hash.set(shorter[i], 1);
+		} else {
+			count = hash.get(shorter[i]);
+			hash.set(shorter[i], count+1);
+		}
+	}
+
+	//traverse longer to match hash
+	for (i = 0; i < longer.length; i++) {
+		if (hash.has(longer[i])) {
+			result.push(longer[i]);
+			count = hash.get(longer[i]);
+			if (count - 1 > 0) {
+				hash.set(longer[i], count-1);
+			}else {
+				hash.delete(longer[i]);
+			}
+		}
+	}
+
+	return result;
+ 
+};
