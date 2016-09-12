@@ -40,15 +40,41 @@ twoSumOn2([0,4,3,0],0);
 //这也是一种解空间转换
 var twoSumOn = function(nums,target) {
     if (nums === undefined || nums.length === 0) {
-        return undefined;
+        return [];
     }
-    var hash = [];
+    var hash = new Map();
     for (var i = 0; i < nums.length; i++) {
-    	if (hash[target - nums[i]] !== undefined) {
-    		return [hash[target - nums[i]], i];
-    	} else {
-    		hash[target - nums[i]] = i;
-    	}
+        if (hash.has(nums[i])) {
+            var j = hash.get(nums[i])
+            return [j, i];
+        } else {
+            hash.set((target - nums[i]),i);
+        }
     }
 }
 twoSumOn([0,4,3,0],0);
+// 以上修改过的代码AC了，就是hash里面存的，是index，以及该index所需的另一半的值，所以只用在hash里面搜nums[i]就好了
+
+// 为了做后面的3sum，4sum，ksum，现在用双指针的办法再做一遍, 但这个双指针的做法不适合本题，因为双指针的做法要排序，本题要返回的是排序前的index，所以应该用hash做本题
+// 把数组排好序后，左右两个指针开始往中间扫，如果加起来的和==target，就左右指针同时减。如果加起来的和小于target，就左指针移动。如果加起来的和大于target，就右指针移动
+
+
+var twoSum = function(nums,target) {
+    if (nums === undefined || nums.length < 2) {
+        return [];
+    }
+    nums.sort();
+    var left = 0;
+    var right = nums.length;
+
+    while (left < right) {
+        var sum = nums[left] + nums[right];
+        if (sum === target) {
+            return [nums[left], nums[right]];
+        } else if ( sum < target) {
+            left++;
+        } else {
+            right--;
+        }
+    }
+}

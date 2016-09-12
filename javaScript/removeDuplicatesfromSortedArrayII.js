@@ -46,7 +46,7 @@ var removeDuplicates = function(nums) {
     }
 };
 
-//上面各种没有写出来我就不想吐槽了，下面再贴一个高人的代码，看完真的很想哭T_T
+//上面各种没有写出来我就不想吐槽自己了，下面再贴一个高人的代码，看完真的很想哭T_T
 public int removeDuplicates(int[] nums) {
     int i = 0;
     for (int n : nums)
@@ -54,3 +54,24 @@ public int removeDuplicates(int[] nums) {
             nums[i++] = n;
     return i;
 }
+
+//以下是自己照高人的答案改了改然后AC了
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var removeDuplicates = function(nums) {
+    var tail = 0;
+    for (var i = 0; i < nums.length; i++) {
+        if (tail < 2 || nums[i] > nums[tail - 2]) {  //这里第一个条件写tail<2或者i<2均可，不影响答案AC 2. 后一个条件，这里记住一定要比较的是 nums[i] 和 nums[tail - 2] 而不是 nums[i] 和 nums[i - 2], 因为前者可以保证，永远比较的是是否和tail所结尾的数组有两个以上的重复，而后者则不能保证i-2的位置
+            nums[tail] = nums[i];
+            tail++;
+        }
+    }
+    
+    return tail;
+    
+};
+
+//自己琢磨了一下这个two pointer的思想，其实是这样，两个指针，一个永远指向去重后的数组的尾部的后面一个，一个是跑在前面用来遍历整个数组。当新数组的长度小于2时，肯定不会有重复，所以可以让tail先自由增长到2。
+//然后先跑的那个i就要开始比较了，自己的当前，是不是能够大于tail那个数组的倒数第二个，注意这里是tail-2，因为tail指的其实是数组尾部的后面一个。如果不是重复的，就放进去，tail++，如果是重复的，什么都不做，i继续往前跑
