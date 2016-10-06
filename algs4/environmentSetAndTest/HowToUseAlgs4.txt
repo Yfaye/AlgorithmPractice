@@ -1,0 +1,75 @@
+http://www.cnblogs.com/zhcncn/p/4689225.html
+
+2. 安装JDK
+1. 默认安装路径是“C:\Program Files\Java\jdk1.8.0_51\”，有人说安装目录不能带空格，否则会出问题（不知是否为真），将其改为“C:\Java\jdk1.8.0_51\”。
+注意安装JDK后，弹出安装JRE的路径，默认为“C:\Program Files\Java\jre1.8.0_51\”，我们在java目录新建一个文件夹jre1.8.0_51，将其改为“C:\Java\jre1.8.0_51\”。
+
+2. 设置环境变量：开始->计算机->属性->高级系统设置->环境变量，设置如下：
+
+JAVA_HOME（在System Variables下新建） C:\Java\jdk1.8.0_51
+CLASSPATH（在System Variables下新建） .;%JAVA_HOME%\lib\dt.jar;%JAVA_HOME%\lib\tools.jar;
+PATH ;%JAVA_HOME%\bin
+
+注意：如果要使用第三方的jre包，在CLASSPATH中务必要将路径详细到.jar，而不能使用目录（如C:\java\jar\）来代表jar目录中所有的jar包。
+
+3. 测试javac
+
+为测试Java编译器（Java compiler）是否正常安装，在cmd中输入"javac -version"看是否正确输出。
+
+4. 测试java
+
+为测试Java解释器（Java interpreter）是否正常安装，在cmd中输入"java -version"看是否正确输出。
+
+5. 测试HelloWOrld
+
+写一个HelloWorld.java程序，编译并运行，有可能会报下面的错误：
+
+D:\TestJava>java HelloWorld
+Registry key 'Software\JavaSoft\Java Runtime Environment\CurrentVersion'
+has value '1.8', but '1.6' is required.
+Error: could not find java.dll
+Error: could not find Java SE Runtime Environment.
+原因是我以前安装过JRE1.6。环境变量在找java.exe时，找到了以前JRE的环境变量去了。从“HKEY_LOCAL_MACHINE\SOFTWARE\JavaSoft\Java Runtime Environment”中可以看到1.8和1.6共存。
+
+解决的方法一是可以将环境变量配置“%JAVA_HOME%\bin”移到PATH的最前面，这样首先找到的java.exe将是JDK1.8的。
+
+二是可以在控制面板中将JRE1.6删除（不用重启）。
+
+4.2 命令行下编译运行代码
+
+1. 由于书上有很多程序都是通过输入重定向来获得输入的，因此使用命令行更容易操作。
+
+2. 但是由于我们要使用stdlib-package.jar包中类，所以我们编译以及运行代码时，都要指定jar包的参数。
+
+3. 对于带一个jar包的编译：【4】
+
+编译：javac -cp C:\Java\jdk1.8.0_51\lib\stdlib-package.jar BinarySearch.java
+运行1：java -cp C:\Java\jdk1.8.0_51\lib\stdlib-package.jar;%classpath% BinarySearch tinyW.txt < tinyT.txt
+运行2：java -cp .;C:\Java\jdk1.8.0_51\lib\stdlib-package.jar BinarySearch tinyW.txt < tinyT.txt
+
+若jar包在当前目录的话，则编译运行为：
+
+编译：javac -cp .\stdlib-package.jar BinarySearch.java
+运行：java -cp .\stdlib-package.jar;%classpath% BinarySearch
+
+4. 对于带多个jar包（在当前目录的lib子目录下）的编译：【5】
+
+（1）如果多个jar包文件在同一个子目录下：（a）可以指定子目录；（b）使用通配符
+
+指定子目录：
+
+编译：javac -Djava.ext.dirs=.\lib BinarySearch.java
+
+运行：java -Djava.ext.dirs=.\lib BinarySearch tinyW.txt < tinyT.txt
+
+使用通配符：
+
+编译：javac .\lib\*.jar BinarySearch.java
+
+运行：java .\lib\*.jar BinarySearch tinyW.txt < tinyT.txt
+
+（2）如果多个jar包文件在不同的目录下：可以使用分号”;“分割
+
+编译：javac -Djava.ext.dirs=C:\Java\jdk1.8.0_51\lib\stdlib-package.jar;C:\Java\jdk1.8.0_51\lib\algs4-package.jar BinarySearch.java
+
+运行：javac -Djava.ext.dirs=C:\Java\jdk1.8.0_51\lib\stdlib-package.jar;C:\Java\jdk1.8.0_51\lib\algs4-package.jar BinarySearch tinyW.txt < tinyT.txt 
