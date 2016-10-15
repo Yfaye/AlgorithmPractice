@@ -25,7 +25,7 @@ public class Deque<Item> implements Iterable<Item> {
     /**
      * Initializes an empty deque.
      */
-    public Deque(){
+    public Deque() {
         d = (Item[]) new Object[2];
         N = 0;
         head = 0;
@@ -54,7 +54,7 @@ public class Deque<Item> implements Iterable<Item> {
 
         Item[] copy = (Item[]) new Object[capacity];
         for (int i = 0; i < N; i++) {
-            copy[i] = a[(head + i) % d.length];
+            copy[i] = d[(head + i) % d.length];
         }
         d = copy;
         head = 0;
@@ -75,7 +75,9 @@ public class Deque<Item> implements Iterable<Item> {
      */                    
     public void addFirst(Item item) {
         validation(item);
-        if (N == d.length) resize(2 * N);
+        if (N == d.length) {
+            resize(2 * N);
+        }
 
         if (N != 0) {
             if (head == 0) {
@@ -97,8 +99,7 @@ public class Deque<Item> implements Iterable<Item> {
         validation(item);
         if (N == d.length) {
             resize(2 * N);
-        }
-        
+        }        
         if (N != 0) {
             if (tail == d.length - 1) {
                 tail = 0;
@@ -123,6 +124,10 @@ public class Deque<Item> implements Iterable<Item> {
             head++;
         }
         N--;
+        if (N == 0) {
+            head = 0;
+            tail = 0;
+        }
         // shrink size of array if necessary
         if (N > 0 && N == d.length/4) {
             resize(d.length / 2);
@@ -137,13 +142,16 @@ public class Deque<Item> implements Iterable<Item> {
         }
         Item item = d[tail];
         d[tail] = null;
-
         if (tail == 0) {
-            tail = a.length - 1;
+            tail = d.length - 1;
         } else {
-            tail--;           
+            tail--;       
         }
         N--;
+        if (N == 0) {
+            head = 0;
+            tail = 0;
+        }
         // shrink size of array if necessary
         if (N > 0 && N == d.length/4) {
             resize(d.length / 2);
@@ -167,6 +175,9 @@ public class Deque<Item> implements Iterable<Item> {
         }
 
         public boolean hasNext() {
+            if (N == 0) {
+                return false;
+            }
             if (tail == d.length - 1) {
                 return i != 0;
             } else {

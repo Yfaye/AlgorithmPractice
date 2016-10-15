@@ -1,2 +1,5 @@
 javac -cp C:\Java\stdlib.jar;C:\Java\algs4.jar;.\ PercolationVisualizer.java
 java -cp C:\Java\stdlib.jar;C:\Java\algs4.jar;.\;%classpath% PercolationVisualizer input50.txt
+
+javac -Xlint -cp C:\Java\stdlib.jar;C:\Java\algs4.jar;.\ Deque.java
+java -cp C:\Java\stdlib.jar;C:\Java\algs4.jar;.\;%classpath% Deque < tobe.txt
