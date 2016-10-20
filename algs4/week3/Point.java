@@ -10,6 +10,9 @@
 
 import java.util.Comparator;
 import edu.princeton.cs.algs4.StdDraw;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Collections;
 
 public class Point implements Comparable<Point> {
 
@@ -90,7 +93,7 @@ public class Point implements Comparable<Point> {
         /* YOUR CODE HERE */
         if (y < that.y || ((y == that.y) && (x < that.x))) {
             return -1;
-        } else if ((y == that.y) && (x0 == x1)) {
+        } else if ((y == that.y) && (x == that.x)) {
             return 0;
         } else {
             return 1;
@@ -105,21 +108,23 @@ public class Point implements Comparable<Point> {
      */
     public Comparator<Point> slopeOrder() {
         /* YOUR CODE HERE */
-    }
-
-    private static class BySlope implements Comparator<Point> {
-        public int compare(Point a, Point b) {
-            double slopeToA = this.slopeTo(a);
-            double slopeToB = this.slopeTo(b);
-            if (slopeToA == slopeToB) {
-                return 0;
-            } else if (slopeToA > slopeToB) {
-                return 1;
-            } else {
-                return -1;
+        class BySlope implements Comparator<Point> {
+            public int compare(Point a, Point b) {
+                double slopeToA = slopeTo(a);
+                double slopeToB = slopeTo(b);
+                if (slopeToA == slopeToB) {
+                    return 0;
+                } else if (slopeToA > slopeToB) {
+                    return 1;
+                } else {
+                    return -1;
+                }
             }
         }
+        return new BySlope();
     }
+
+
 
 
     /**
@@ -139,5 +144,21 @@ public class Point implements Comparable<Point> {
      */
     public static void main(String[] args) {
         /* YOUR CODE HERE */
+        Point a = new Point(1,3);
+        Point b = new Point(2,4);
+        Point c = new Point(5,6);
+        List<Point> dots = Arrays.asList(
+            new Point(1,3),
+            new Point(2,4),
+            new Point(3,3),
+            new Point(4,5)
+        );
+        for (Point dot : dots) {
+            dot.draw();
+        }
+        Collections.sort(dots, slopeOrder());
+        System.out.println(dots);
+        Collections.sort(dots);
+        System.out.println(dots);
     }
 }
