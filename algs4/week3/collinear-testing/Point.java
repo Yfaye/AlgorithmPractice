@@ -10,11 +10,9 @@
 
 import java.util.Comparator;
 import edu.princeton.cs.algs4.StdDraw;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Collections;
 
 public class Point implements Comparable<Point> {
+
     private final int x;     // x-coordinate of this point
     private final int y;     // y-coordinate of this point
 
@@ -62,18 +60,6 @@ public class Point implements Comparable<Point> {
      */
     public double slopeTo(Point that) {
         /* YOUR CODE HERE */
-        double slope;
-        if (y == that.y && x == that.x) {
-            slope = Double.NEGATIVE_INFINITY;
-        } else if (x == that.x) {
-            slope = Double.POSITIVE_INFINITY;
-        } else if (y == that.y) {
-            slope = +0.0;
-        } else {
-            slope = ((that.y - y) + 0.0)/(that.x - x); 
-        }
-
-        return slope;
     }
 
     /**
@@ -90,20 +76,6 @@ public class Point implements Comparable<Point> {
      */
     public int compareTo(Point that) {
         /* YOUR CODE HERE */
-        /*
-        if (y < that.y || ((y == that.y) && (x < that.x))) {
-            return -1;
-        } else if ((y == that.y) && (x == that.x)) {
-            return 0;
-        } else {
-            return 1;
-        }
-        */
-        int diff = y - that.y;
-        if (diff == 0) {
-            diff = x - that.x;
-        }
-        return diff;
     }
 
     /**
@@ -114,20 +86,8 @@ public class Point implements Comparable<Point> {
      */
     public Comparator<Point> slopeOrder() {
         /* YOUR CODE HERE */
-        return new Comparator<Point>() {
-            @Override
-            public int compare(Point a, Point b) {
-                double slopeDiff = slopeTo(a) - slopeTo(b);
-                if (slopeDiff == 0) {
-                    return 0;
-                } else if (slopeDiff > 0) {
-                    return 1;
-                } else {
-                    return -1;
-                }
-            }
-        };
     }
+
 
     /**
      * Returns a string representation of this point.
@@ -146,21 +106,5 @@ public class Point implements Comparable<Point> {
      */
     public static void main(String[] args) {
         /* YOUR CODE HERE */
-        Point a = new Point(1,3);
-        Point b = new Point(2,4);
-        Point c = new Point(5,6);
-        List<Point> dots = Arrays.asList(
-            new Point(1,3),
-            new Point(2,4),
-            new Point(3,3),
-            new Point(4,5)
-        );
-        //for (Point dot : dots) {
-        //    dot.draw();
-        //}
-        Collections.sort(dots, a.slopeOrder());
-        System.out.println(dots);
-        Collections.sort(dots);
-        System.out.println(dots);
     }
 }
