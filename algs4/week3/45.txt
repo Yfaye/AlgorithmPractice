@@ -1,0 +1,781 @@
+See the Assessment Guide for information on how to interpret this report.
+
+Assessment Summary
+
+Compilation:  PASSED
+Style:        FAILED
+Findbugs:     Potential bugs found.
+API:          PASSED
+
+Correctness:  12/41 tests passed
+Memory:       1/1 tests passed
+Timing:       26/41 tests passed
+
+Aggregate score: 44.88% [Correctness: 65%, Memory: 10%, Timing: 25%, Style: 0%]
+
+Assessment Details
+
+The following files were submitted:
+----------------------------------
+total 24K
+-rw-r--r-- 1 2.8K Oct 22 07:43 BruteCollinearPoints.java
+-rw-r--r-- 1 4.2K Oct 22 07:43 FastCollinearPoints.java
+-rw-r--r-- 1 5.2K Oct 22 07:43 Point.java
+-rw-r--r-- 1 4.0K Oct 22 07:43 studentSubmission.zip
+
+
+********************************************************************************
+*          COMPILING                                                           *
+********************************************************************************
+
+
+% javac Point.java
+*-----------------------------------------------------------
+
+================================================================
+
+% javac BruteCollinearPoints.java
+*-----------------------------------------------------------
+
+================================================================
+
+% javac FastCollinearPoints.java
+*-----------------------------------------------------------
+
+================================================================
+
+
+
+% checkstyle *.java
+*-----------------------------------------------------------
+[ERROR] Point.java:149:31: ',' is not followed by whitespace. [WhitespaceAfter]
+[ERROR] Point.java:150:31: ',' is not followed by whitespace. [WhitespaceAfter]
+[ERROR] Point.java:151:31: ',' is not followed by whitespace. [WhitespaceAfter]
+[ERROR] Point.java:153:25: ',' is not followed by whitespace. [WhitespaceAfter]
+[ERROR] Point.java:154:25: ',' is not followed by whitespace. [WhitespaceAfter]
+[ERROR] Point.java:155:25: ',' is not followed by whitespace. [WhitespaceAfter]
+[ERROR] Point.java:156:25: ',' is not followed by whitespace. [WhitespaceAfter]
+[ERROR] Point.java:158:11: '//' or '/*' is not followed by whitespace. [IllegalTokenText]
+[ERROR] BruteCollinearPoints.java:11:8: Unused import statement for 'edu.princeton.cs.algs4.StdDraw'. [UnusedImports]
+[ERROR] BruteCollinearPoints.java:14:1: File contains tab characters (this is the first instance). Configure your editor to replace tabs with spaces. [FileTabCharacter]
+[ERROR] BruteCollinearPoints.java:15:37: The comment is empty. [IllegalTokenText]
+[ERROR] BruteCollinearPoints.java:16:28: The comment is empty. [IllegalTokenText]
+[ERROR] BruteCollinearPoints.java:44:27: 'if' is not followed by whitespace. [WhitespaceAround]
+[ERROR] BruteCollinearPoints.java:59:50: '{' is not preceded with whitespace. [WhitespaceAround]
+[ERROR] FastCollinearPoints.java:17:1: File contains tab characters (this is the first instance). Configure your editor to replace tabs with spaces. [FileTabCharacter]
+[ERROR] FastCollinearPoints.java:50:43: '{' is not preceded with whitespace. [WhitespaceAround]
+[ERROR] FastCollinearPoints.java:71:66: '{' is not preceded with whitespace. [WhitespaceAround]
+[ERROR] FastCollinearPoints.java:98:50: '{' is not preceded with whitespace. [WhitespaceAround]
+Checkstyle ends with 18 errors.
+
+================================================================
+
+
+% findbugs *.class
+*-----------------------------------------------------------
+H D DLS_DEAD_LOCAL_STORE DLS: Dead store to c in Point.main(String[])  At Point.java:[line 151]
+H D DLS_DEAD_LOCAL_STORE DLS: Dead store to b in Point.main(String[])  At Point.java:[line 150]
+M C UWF_UNWRITTEN_FIELD UwF: Unwritten field: BruteCollinearPoints.allSeg  At BruteCollinearPoints.java:[line 46]
+M C UWF_UNWRITTEN_FIELD UwF: Unwritten field: BruteCollinearPoints.sortedPoints  At BruteCollinearPoints.java:[line 35]
+M C NP_UNWRITTEN_FIELD NP: Read of unwritten field allSeg in new BruteCollinearPoints(Point[])  At BruteCollinearPoints.java:[line 46]
+M C NP_UNWRITTEN_FIELD NP: Read of unwritten field sortedPoints in new BruteCollinearPoints(Point[])  At BruteCollinearPoints.java:[line 35]
+M C NP_UNWRITTEN_FIELD NP: Read of unwritten field allSeg in BruteCollinearPoints.numberOfSegments()  At BruteCollinearPoints.java:[line 74]
+M C NP_UNWRITTEN_FIELD NP: Read of unwritten field allSeg in BruteCollinearPoints.segments()  At BruteCollinearPoints.java:[line 81]
+Warnings generated: 8
+
+================================================================
+
+
+Testing the APIs of your programs.
+*-----------------------------------------------------------
+Point:
+
+BruteCollinearPoints:
+
+FastCollinearPoints:
+
+================================================================
+
+
+******************************************************************************
+*          CORRECTNESS
+******************************************************************************
+
+Testing methods in Point
+*-----------------------------------------------------------
+Running 3 total tests.
+
+Test 1: p.slopeTo(q)
+  *  positive infinite slope, where p and q have coordinates in [0, 500)
+  *  positive infinite slope, where p and q have coordinates in [0, 32768)
+  *  negative infinite slope, where p and q have coordinates in [0, 500)
+  *  negative infinite slope, where p and q have coordinates in [0, 32768)
+  *  positive zero     slope, where p and q have coordinates in [0, 500)
+  *  positive zero     slope, where p and q have coordinates in [0, 32768)
+  *  symmetric  for random points p and q with coordinates in [0, 500)
+  *  symmetric  for random points p and q with coordinates in [0, 32768)
+  *  transitive for random points p, q, and r with coordinates in [0, 500)
+  *  transitive for random points p, q, and r with coordinates in [0, 32768)
+  *  slopeTo(), where p and q have coordinates in [0, 500)
+  *  slopeTo(), where p and q have coordinates in [0, 32768)
+  *  slopeTo(), where p and q have coordinates in [0, 10)
+  *  throw a java.lang.NullPointerException if argument is null
+==> passed
+
+Test 2: p.compareTo(q)
+  *  reflexive, where p and q have coordinates in [0, 500)
+  *  reflexive, where p and q have coordinates in [0, 32768)
+  *  antisymmetric, where p and q have coordinates in [0, 500)
+  *  antisymmetric, where p and q have coordinates in [0, 32768)
+  *  transitive, where p, q, and r have coordinates in [0, 500)
+  *  transitive, where p, q, and r have coordinates in [0, 32768)
+  *  sign of compareTo(), where p and q have coordinates in [0, 500)
+  *  sign of compareTo(), where p and q have coordinates in [0, 32768)
+  *  sign of compareTo(), where p and q have coordinates in [0, 10)
+  *  throw java.lang.NullPointerException exception if argument is null
+==> passed
+
+Test 3: p.slopeOrder().compare(q, r)
+  *  reflexive, where p and q have coordinates in [0, 500)
+     Failed on trial 86 of 100000
+     p                              = (216, 104)
+     q                              = (216, 475)
+     p.slopeOrder().compare(q, q))  = -1
+  *  reflexive, where p and q have coordinates in [0, 32768)
+     Failed on trial 49695 of 100000
+     p                              = (3620, 6170)
+     q                              = (3620, 28690)
+     p.slopeOrder().compare(q, q))  = -1
+  *  antisymmetric, where p, q, and r have coordinates in [0, 500)
+  *  antisymmetric, where p, q, and r have coordinates in [0, 32768)
+  *  transitive, where p, q, r, and s have coordinates in [0, 500)
+  *  transitive, where p, q, r, and s have coordinates in [0, 32768)
+  *  sign of compare(), where p, q, and r have coordinates in [0, 500)
+  *  sign of compare(), where p, q, and r have coordinates in [0, 32768)
+  *  sign of compare(), where p, q, and r have coordinates in [0, 10)
+     Failed on trial 75 of 100000
+     p                         = (4, 1)
+     q                         = (4, 8)
+     r                         = (4, 3)
+     student   p.compare(q, r) = -1
+     reference p.compare(q, r) = 0
+     reference p.slopeTo(q)    = Infinity
+     reference p.slopeTo(r)    = Infinity
+  *  throw java.lang.NullPointerException if either argument is null
+==> FAILED
+
+
+Total: 2/3 tests passed!
+
+
+================================================================
+
+******************************************************************************
+*          correctness (using reference Point.java and LineSegment.java)
+******************************************************************************
+
+Testing methods in BruteCollinearPoints
+*-----------------------------------------------------------
+Running 17 total tests.
+
+The inputs satisfy the following conditions:
+  - no duplicate points
+  - no 5 (or more) points are collinear
+  - all x- and y-coordinates between 0 and 32,767
+
+Test 1: Points from a file
+  *  filename = input8.txt
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.file(TestBruteCollinearPoints.java:154)
+     TestBruteCollinearPoints.test1(TestBruteCollinearPoints.java:159)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:706)
+
+  *  filename = equidistant.txt
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.file(TestBruteCollinearPoints.java:154)
+     TestBruteCollinearPoints.test1(TestBruteCollinearPoints.java:160)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:706)
+
+  *  filename = input40.txt
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.file(TestBruteCollinearPoints.java:154)
+     TestBruteCollinearPoints.test1(TestBruteCollinearPoints.java:161)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:706)
+
+  *  filename = input48.txt
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.file(TestBruteCollinearPoints.java:154)
+     TestBruteCollinearPoints.test1(TestBruteCollinearPoints.java:162)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:706)
+
+==> FAILED
+
+Test 2a: Points from a file with horizontal line segments
+  *  filename = horizontal5.txt
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.file(TestBruteCollinearPoints.java:154)
+     TestBruteCollinearPoints.test2a(TestBruteCollinearPoints.java:168)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:709)
+
+  *  filename = horizontal25.txt
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.file(TestBruteCollinearPoints.java:154)
+     TestBruteCollinearPoints.test2a(TestBruteCollinearPoints.java:169)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:709)
+
+==> FAILED
+
+Test 2b: Random horizontal line segments
+  *   1 random horizontal line segment
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.horizontalSegments(TestBruteCollinearPoints.java:181)
+     TestBruteCollinearPoints.test2b(TestBruteCollinearPoints.java:223)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:712)
+
+     -  failed on trial 1 of 500
+     4
+      8022 13744
+     16346 13744
+     17989 13744
+     13180 13744
+
+  *   5 random horizontal line segments
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.horizontalSegments(TestBruteCollinearPoints.java:181)
+     TestBruteCollinearPoints.test2b(TestBruteCollinearPoints.java:224)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:712)
+
+     -  failed on trial 1 of 250
+     20
+     19630  7301
+     20260 16092
+      7705  3446
+     15745  3446
+      8318  1118
+      1134 16092
+     11972  7301
+      7431 16092
+     19108 12271
+     19839 12271
+      8787  7301
+      3758 12271
+     11908  1118
+      3822  3446
+     11620  7301
+     11098 16092
+     19409  3446
+     12537  1118
+      6182  1118
+      7591 12271
+
+  *  10 random horizontal line segments
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.horizontalSegments(TestBruteCollinearPoints.java:181)
+     TestBruteCollinearPoints.test2b(TestBruteCollinearPoints.java:225)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:712)
+
+     -  failed on trial 1 of 50
+
+  *  15 random horizontal line segments
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.horizontalSegments(TestBruteCollinearPoints.java:181)
+     TestBruteCollinearPoints.test2b(TestBruteCollinearPoints.java:226)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:712)
+
+     -  failed on trial 1 of 5
+
+==> FAILED
+
+Test 3a: Points from a file with vertical line segments
+  *  filename = vertical5.txt
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.file(TestBruteCollinearPoints.java:154)
+     TestBruteCollinearPoints.test3a(TestBruteCollinearPoints.java:232)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:715)
+
+  *  filename = vertical25.txt
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.file(TestBruteCollinearPoints.java:154)
+     TestBruteCollinearPoints.test3a(TestBruteCollinearPoints.java:233)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:715)
+
+==> FAILED
+
+Test 3b: Random vertical line segments
+  *   1 random vertical line segment
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.verticalSegments(TestBruteCollinearPoints.java:205)
+     TestBruteCollinearPoints.test3b(TestBruteCollinearPoints.java:239)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:718)
+
+     -  failed on trial 1 of 500
+     4
+     10719 19838
+     10719  3271
+     10719 16982
+     10719 11412
+
+  *   5 random vertical line segments
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.verticalSegments(TestBruteCollinearPoints.java:205)
+     TestBruteCollinearPoints.test3b(TestBruteCollinearPoints.java:240)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:718)
+
+     -  failed on trial 1 of 250
+     20
+     10823 17491
+      8520 19080
+     12285 19968
+      8520 20581
+     10823 17280
+     12285 14902
+      9252  4666
+      2411  5859
+     12285 14149
+     12285 15479
+      2411 16725
+      9252 13113
+     10823  4088
+      2411 19747
+      8520 18047
+      9252  4389
+      8520  8849
+      2411  1044
+      9252 16063
+     10823 17849
+
+  *  10 random vertical line segments
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.verticalSegments(TestBruteCollinearPoints.java:205)
+     TestBruteCollinearPoints.test3b(TestBruteCollinearPoints.java:241)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:718)
+
+     -  failed on trial 1 of 50
+
+  *  15 random vertical line segments
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.verticalSegments(TestBruteCollinearPoints.java:205)
+     TestBruteCollinearPoints.test3b(TestBruteCollinearPoints.java:242)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:718)
+
+     -  failed on trial 1 of 5
+
+==> FAILED
+
+Test 4a: Points from a file with no line segments
+  *  filename = random23.txt
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.file(TestBruteCollinearPoints.java:154)
+     TestBruteCollinearPoints.test4a(TestBruteCollinearPoints.java:248)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:721)
+
+  *  filename = random38.txt
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.file(TestBruteCollinearPoints.java:154)
+     TestBruteCollinearPoints.test4a(TestBruteCollinearPoints.java:249)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:721)
+
+==> FAILED
+
+Test 4b: Random points with no line segments
+  *   5 random points
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.no4CollinearPoints(TestBruteCollinearPoints.java:260)
+     TestBruteCollinearPoints.test4b(TestBruteCollinearPoints.java:278)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:724)
+
+     -  failed on trial 1 of 500
+     5
+     24266 14745
+     10736 28978
+     15901 17848
+     13720  3238
+     23247  1146
+
+  *  10 random points
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.no4CollinearPoints(TestBruteCollinearPoints.java:260)
+     TestBruteCollinearPoints.test4b(TestBruteCollinearPoints.java:279)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:724)
+
+     -  failed on trial 1 of 250
+     10
+      1673 26544
+      3029  8310
+      7319 19183
+     11723 25883
+     22796   845
+     13377 17397
+     30471 27161
+     32424 28959
+     22498 10251
+      9507 27148
+
+  *  20 random points
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.no4CollinearPoints(TestBruteCollinearPoints.java:260)
+     TestBruteCollinearPoints.test4b(TestBruteCollinearPoints.java:280)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:724)
+
+     -  failed on trial 1 of 100
+     20
+     18634 14931
+     17142 28091
+     32008 12050
+     13034  4858
+       757 14482
+     11027  4692
+         0  4160
+     18335  5841
+     30472 21440
+     14818  7250
+     10099 16517
+     25804 24057
+     22177  8778
+     17801 19881
+     19548 14624
+     15774 31354
+     29723  7236
+     20631 32498
+      5824 21669
+     19708 16744
+
+  *  50 random points
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.no4CollinearPoints(TestBruteCollinearPoints.java:260)
+     TestBruteCollinearPoints.test4b(TestBruteCollinearPoints.java:281)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:724)
+
+     -  failed on trial 1 of 10
+
+==> FAILED
+
+Test 5: Points from a file with fewer than 4 points
+  *  filename = input1.txt
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.file(TestBruteCollinearPoints.java:154)
+     TestBruteCollinearPoints.test5(TestBruteCollinearPoints.java:287)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:727)
+
+  *  filename = input2.txt
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.file(TestBruteCollinearPoints.java:154)
+     TestBruteCollinearPoints.test5(TestBruteCollinearPoints.java:288)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:727)
+
+  *  filename = input3.txt
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.file(TestBruteCollinearPoints.java:154)
+     TestBruteCollinearPoints.test5(TestBruteCollinearPoints.java:289)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:727)
+
+==> FAILED
+
+Test 6: Check for dependence on either compareTo() or compare()
+        returning { -1, +1, 0 } instead of { negative integer,
+        positive integer, zero }
+  *  filename = equidistant.txt
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.file(TestBruteCollinearPoints.java:154)
+     TestBruteCollinearPoints.test6(TestBruteCollinearPoints.java:298)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:730)
+
+  *  filename = input40.txt
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.file(TestBruteCollinearPoints.java:154)
+     TestBruteCollinearPoints.test6(TestBruteCollinearPoints.java:299)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:730)
+
+  *  filename = input48.txt
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.file(TestBruteCollinearPoints.java:154)
+     TestBruteCollinearPoints.test6(TestBruteCollinearPoints.java:300)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:730)
+
+==> FAILED
+
+Test 7: Check for fragile dependence on return value of toString()
+  *  filename = equidistant.txt
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.file(TestBruteCollinearPoints.java:154)
+     TestBruteCollinearPoints.test7(TestBruteCollinearPoints.java:308)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:733)
+
+  *  filename = input40.txt
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.file(TestBruteCollinearPoints.java:154)
+     TestBruteCollinearPoints.test7(TestBruteCollinearPoints.java:309)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:733)
+
+  *  filename = input48.txt
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.file(TestBruteCollinearPoints.java:154)
+     TestBruteCollinearPoints.test7(TestBruteCollinearPoints.java:310)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:733)
+
+==> FAILED
+
+Test 8: Random line segments, none vertical or horizontal
+  *   1 random line segment
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.noVerticalOrHorizontalSegments(TestBruteCollinearPoints.java:323)
+     TestBruteCollinearPoints.test8(TestBruteCollinearPoints.java:341)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:736)
+
+     -  failed on trial 1 of 500
+     4
+     16310 15158
+      6470 11698
+     23198 17580
+      4502 11006
+
+  *   5 random line segments
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.noVerticalOrHorizontalSegments(TestBruteCollinearPoints.java:323)
+     TestBruteCollinearPoints.test8(TestBruteCollinearPoints.java:342)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:736)
+
+     -  failed on trial 1 of 250
+     20
+      8635 14311
+     11276  6315
+      8811  7462
+     12001   961
+     11228  7010
+     12704 15053
+     12971  8791
+     10604  2203
+      7725 14077
+     13553 13489
+     12320  9320
+     11150  6845
+      5905 13609
+     17846  8645
+      9125 14437
+     13165 10357
+     11098  6735
+      1166  6461
+     12284 12483
+      3946  6825
+
+  *  10 random line segments
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.noVerticalOrHorizontalSegments(TestBruteCollinearPoints.java:323)
+     TestBruteCollinearPoints.test8(TestBruteCollinearPoints.java:343)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:736)
+
+     -  failed on trial 1 of 100
+
+  *  15 random line segments
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.noVerticalOrHorizontalSegments(TestBruteCollinearPoints.java:323)
+     TestBruteCollinearPoints.test8(TestBruteCollinearPoints.java:344)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:736)
+
+     -  failed on trial 1 of 50
+
+==> FAILED
+
+Test 9: Random line segments
+  *   1 random line segment
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.arbitrarySegments(TestBruteCollinearPoints.java:356)
+     TestBruteCollinearPoints.test9(TestBruteCollinearPoints.java:374)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:739)
+
+     -  failed on trial 1 of 500
+     4
+      5800  1906
+      8284  5080
+      5854  1975
+      7744  4390
+
+  *   5 random line segments
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.arbitrarySegments(TestBruteCollinearPoints.java:356)
+     TestBruteCollinearPoints.test9(TestBruteCollinearPoints.java:375)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:739)
+
+     -  failed on trial 1 of 250
+     20
+      5852 12887
+      1860  8417
+     10919  4478
+       670  7533
+      3614  4016
+      6092 13139
+      7707  3642
+      4364  5891
+      4184  5441
+      3820  9873
+      4712 11690
+     11010  9580
+      3434  3566
+      8364  3813
+      7488  3585
+      1412  8225
+       110  7117
+     11010 13210
+     11010 10438
+     11010 13342
+
+  *  10 random line segments
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.arbitrarySegments(TestBruteCollinearPoints.java:356)
+     TestBruteCollinearPoints.test9(TestBruteCollinearPoints.java:376)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:739)
+
+     -  failed on trial 1 of 100
+
+  *  15 random line segments
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testSegments(TestBruteCollinearPoints.java:110)
+     TestBruteCollinearPoints.arbitrarySegments(TestBruteCollinearPoints.java:356)
+     TestBruteCollinearPoints.test9(TestBruteCollinearPoints.java:377)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:739)
+
+     -  failed on trial 1 of 50
+
+==> FAILED
+
+Test 10: Check that data type is immutable by testing whether each method
+        returns the same value, regardless of any intervening operations
+  *  input8.txt
+     java.lang.NullPointerException
+
+     BruteCollinearPoints.<init>(BruteCollinearPoints.java:35)
+     TestBruteCollinearPoints.testImmutable(TestBruteCollinearPoints.java:424)
+     TestBruteCollinearPoints.testImmutable(TestBruteCollinearPoints.java:508)
+     TestBruteCollinearPoints.test10(TestBruteCollinearPoints.java:523)
+     TestBruteCollinearPoints.main(TestBruteCollinearPoints.java:742)
+
+     -  sequence of operations was:
+          BruteCollinearPoints collinear = new BruteCollinearPoints(points);
+     -  failed on trial 1 of 100
+
+  *  equidistant.txt
+     java.lang.NullPointerException
+
+  
+
+...
+
+Warning: the grading output was truncated due to excessive length.
+Typically, this is becasue you have a method that has an unanticipated side effect
+(such as printing to standard output or throwing an exception).

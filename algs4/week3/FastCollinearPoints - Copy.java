@@ -24,6 +24,10 @@ public class FastCollinearPoints {
      * 
      */
     public FastCollinearPoints(Point[] points) {
+    	if (points == null) {
+    		throw new java.lang.NullPointerException("The argument to the constructor is null");
+    	}
+    	checkDuplicatedPoints(points);
         Point[] copiedPoints = new Point[points.length];
     	// copy the points array
     	for (int i = 0; i < points.length; i++) {
@@ -44,14 +48,14 @@ public class FastCollinearPoints {
             for (int j = 1; j < copiedPoints.length; j++) {
                 curSlope = curPoint.slopeTo(copiedPoints[j]);
                 if (curSlope == prevSlope){
-                    linedPoints.add(copiedPoints[j]);
+                    linedPoints.add(copiedPoints[i]);
                 } else {
                     if (linedPoints.size() >= 3) {
                         linedPoints.add(curPoint);
                         addNewSeg(linedPoints, prevSlope);
                     }
                     linedPoints.clear();
-                    linedPoints.add(copiedPoints[j]);
+                    linedPoints.add(curPoint);
                 }
                 prevSlope = curSlope;
             }

@@ -8,11 +8,13 @@
  *
  ******************************************************************************/
 import java.util.Arrays;
-import java.util.ArrayList;
 import edu.princeton.cs.algs4.StdDraw;
 
 public class BruteCollinearPoints {
-	private LineSegment[] segments;
+	private LineSegment[] allSeg; // All segments containing 4 points
+	private Point[] sortedPoints; //
+	private int lineIdx; //
+
     /**
      * Constructor: finds all line segments containing 4 points
      *
@@ -20,27 +22,35 @@ public class BruteCollinearPoints {
      * 
      */
     public BruteCollinearPoints(Point[] points) {
-        checkDuplicatedPoints(points);
-        ArrayList<LineSegment> foundSegments = new ArrayList<>();
+    	if (points == null) {
+    		throw new java.lang.NullPointerException("The argument to the constructor is null");
+    	}
+    	checkDuplicatedPoints(points);
 
-        Point[] pointsCopy = Arrays.copyOf(points, points.length);
-        Arrays.sort(pointsCopy);
+    	// copy the points array
+    	for (int i = 0; i < points.length; i++) {
+    		if (points[i] == null) {
+    			throw new java.lang.NullPointerException("The point is null");
+    		}
+    		sortedPoints[i] = points[i];
+    	}
+    	Arrays.sort(sortedPoints); 
+    	lineIdx = 0;
 
-        for (int p = 0; p < pointsCopy.length - 3; p++) {
-            for (int q = p + 1; q < pointsCopy.length - 2; q++) {
-                for (int r = q + 1; r < pointsCopy.length - 1; r++) {
-                    for (int s = r + 1; s < pointsCopy.length; s++) {
-                        if (pointsCopy[p].slopeTo(pointsCopy[q]) == pointsCopy[p].slopeTo(pointsCopy[r]) &&
-                                pointsCopy[p].slopeTo(pointsCopy[q]) == pointsCopy[p].slopeTo(pointsCopy[s])) {
-                            foundSegments.add(new LineSegment(pointsCopy[p], pointsCopy[s]));
-                        }
-                    }
-                }
-            }
-        }
-
-        segments = foundSegments.toArray(new LineSegment[foundSegments.size()]);
-    }
+    	for (int i = 0; i < sortedPoints.length - 3; i++) {
+    		for (int j = i + 1; j < sortedPoints.length - 2; j++) {
+    			for (int k = j + 1; k < sortedPoints.length - 1; k++) {
+    				for (int h = k + 1; h < sortedPoints.length; h++) {
+    					if((sortedPoints[i].slopeTo(sortedPoints[j]) == sortedPoints[j].slopeTo(sortedPoints[k]))
+    						&& (sortedPoints[j].slopeTo(sortedPoints[k]) == sortedPoints[k].slopeTo(sortedPoints[h]))) {
+    							allSeg[lineIdx] = new LineSegment(sortedPoints[i], sortedPoints[h]);
+    							lineIdx++;
+    					}
+    				}
+    			}
+    		}
+    	}
+    } 
 
     /**
      * Check if the argument contains a repeated point
@@ -61,13 +71,13 @@ public class BruteCollinearPoints {
      * @return the number of segments containing 4 points;
      */
     public int numberOfSegments() {
-   		return segments.length;
+   		return allSeg.length;
     }
 
     /**
      * @return the LineSegment Array in which all segments containing 4 points;
      */
     public LineSegment[] segments() {
-   		return Arrays.copyOf(segments, numberOfSegments());
+   		return Arrays.copyOf(allSeg, allSeg.length);
     }
 }

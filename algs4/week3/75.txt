@@ -1,0 +1,730 @@
+See the Assessment Guide for information on how to interpret this report.
+
+Assessment Summary
+
+Compilation:  PASSED
+Style:        FAILED
+Findbugs:     No potential bugs found.
+API:          PASSED
+
+Correctness:  27/41 tests passed
+Memory:       1/1 tests passed
+Timing:       36/41 tests passed
+
+Aggregate score: 74.76% [Correctness: 65%, Memory: 10%, Timing: 25%, Style: 0%]
+
+Assessment Details
+
+The following files were submitted:
+----------------------------------
+total 24K
+-rw-r--r-- 1 2.7K Oct 22 08:23 BruteCollinearPoints.java
+-rw-r--r-- 1 4.2K Oct 22 08:23 FastCollinearPoints.java
+-rw-r--r-- 1 5.5K Oct 22 08:23 Point.java
+-rw-r--r-- 1 4.0K Oct 22 08:23 studentSubmission.zip
+
+
+********************************************************************************
+*          COMPILING                                                           *
+********************************************************************************
+
+
+% javac Point.java
+*-----------------------------------------------------------
+
+================================================================
+
+% javac BruteCollinearPoints.java
+*-----------------------------------------------------------
+
+================================================================
+
+% javac FastCollinearPoints.java
+*-----------------------------------------------------------
+
+================================================================
+
+
+
+% checkstyle *.java
+*-----------------------------------------------------------
+[ERROR] Point.java:13:8: Unused import statement for 'java.util.Arrays'. [UnusedImports]
+[ERROR] Point.java:14:8: Unused import statement for 'java.util.List'. [UnusedImports]
+[ERROR] Point.java:15:8: Unused import statement for 'java.util.Collections'. [UnusedImports]
+[ERROR] BruteCollinearPoints.java:12:8: Unused import statement for 'edu.princeton.cs.algs4.StdDraw'. [UnusedImports]
+[ERROR] BruteCollinearPoints.java:15:1: File contains tab characters (this is the first instance). Configure your editor to replace tabs with spaces. [FileTabCharacter]
+[ERROR] BruteCollinearPoints.java:49:50: '{' is not preceded with whitespace. [WhitespaceAround]
+[ERROR] FastCollinearPoints.java:17:1: File contains tab characters (this is the first instance). Configure your editor to replace tabs with spaces. [FileTabCharacter]
+[ERROR] FastCollinearPoints.java:50:43: '{' is not preceded with whitespace. [WhitespaceAround]
+[ERROR] FastCollinearPoints.java:71:66: '{' is not preceded with whitespace. [WhitespaceAround]
+[ERROR] FastCollinearPoints.java:98:50: '{' is not preceded with whitespace. [WhitespaceAround]
+Checkstyle ends with 10 errors.
+
+================================================================
+
+
+% findbugs *.class
+*-----------------------------------------------------------
+
+================================================================
+
+
+Testing the APIs of your programs.
+*-----------------------------------------------------------
+Point:
+
+BruteCollinearPoints:
+
+FastCollinearPoints:
+
+================================================================
+
+
+******************************************************************************
+*          CORRECTNESS
+******************************************************************************
+
+Testing methods in Point
+*-----------------------------------------------------------
+Running 3 total tests.
+
+Test 1: p.slopeTo(q)
+  *  positive infinite slope, where p and q have coordinates in [0, 500)
+  *  positive infinite slope, where p and q have coordinates in [0, 32768)
+  *  negative infinite slope, where p and q have coordinates in [0, 500)
+  *  negative infinite slope, where p and q have coordinates in [0, 32768)
+  *  positive zero     slope, where p and q have coordinates in [0, 500)
+  *  positive zero     slope, where p and q have coordinates in [0, 32768)
+  *  symmetric  for random points p and q with coordinates in [0, 500)
+  *  symmetric  for random points p and q with coordinates in [0, 32768)
+  *  transitive for random points p, q, and r with coordinates in [0, 500)
+  *  transitive for random points p, q, and r with coordinates in [0, 32768)
+  *  slopeTo(), where p and q have coordinates in [0, 500)
+  *  slopeTo(), where p and q have coordinates in [0, 32768)
+  *  slopeTo(), where p and q have coordinates in [0, 10)
+  *  throw a java.lang.NullPointerException if argument is null
+==> passed
+
+Test 2: p.compareTo(q)
+  *  reflexive, where p and q have coordinates in [0, 500)
+  *  reflexive, where p and q have coordinates in [0, 32768)
+  *  antisymmetric, where p and q have coordinates in [0, 500)
+  *  antisymmetric, where p and q have coordinates in [0, 32768)
+  *  transitive, where p, q, and r have coordinates in [0, 500)
+  *  transitive, where p, q, and r have coordinates in [0, 32768)
+  *  sign of compareTo(), where p and q have coordinates in [0, 500)
+  *  sign of compareTo(), where p and q have coordinates in [0, 32768)
+  *  sign of compareTo(), where p and q have coordinates in [0, 10)
+  *  throw java.lang.NullPointerException exception if argument is null
+==> passed
+
+Test 3: p.slopeOrder().compare(q, r)
+  *  reflexive, where p and q have coordinates in [0, 500)
+     Failed on trial 383 of 100000
+     p                              = (48, 287)
+     q                              = (48, 483)
+     p.slopeOrder().compare(q, q))  = -1
+  *  reflexive, where p and q have coordinates in [0, 32768)
+     Failed on trial 16021 of 100000
+     p                              = (1867, 28248)
+     q                              = (1867, 18295)
+     p.slopeOrder().compare(q, q))  = -1
+  *  antisymmetric, where p, q, and r have coordinates in [0, 500)
+     Failed on trial 14630 of 100000
+     p                             = (297, 464)
+     q                             = (297, 290)
+     r                             = (297, 56)
+     p.slopeOrder().compare(q, r)  = -1
+     p.slopeOrder().compare(r, q)  = -1
+  *  antisymmetric, where p, q, and r have coordinates in [0, 32768)
+  *  transitive, where p, q, r, and s have coordinates in [0, 500)
+  *  transitive, where p, q, r, and s have coordinates in [0, 32768)
+  *  sign of compare(), where p, q, and r have coordinates in [0, 500)
+  *  sign of compare(), where p, q, and r have coordinates in [0, 32768)
+  *  sign of compare(), where p, q, and r have coordinates in [0, 10)
+     Failed on trial 40 of 100000
+     p                         = (6, 7)
+     q                         = (6, 8)
+     r                         = (6, 9)
+     student   p.compare(q, r) = -1
+     reference p.compare(q, r) = 0
+     reference p.slopeTo(q)    = Infinity
+     reference p.slopeTo(r)    = Infinity
+  *  throw java.lang.NullPointerException if either argument is null
+==> FAILED
+
+
+Total: 2/3 tests passed!
+
+
+================================================================
+
+******************************************************************************
+*          correctness (using reference Point.java and LineSegment.java)
+******************************************************************************
+
+Testing methods in BruteCollinearPoints
+*-----------------------------------------------------------
+Running 17 total tests.
+
+The inputs satisfy the following conditions:
+  - no duplicate points
+  - no 5 (or more) points are collinear
+  - all x- and y-coordinates between 0 and 32,767
+
+Test 1: Points from a file
+  *  filename = input8.txt
+  *  filename = equidistant.txt
+  *  filename = input40.txt
+  *  filename = input48.txt
+==> passed
+
+Test 2a: Points from a file with horizontal line segments
+  *  filename = horizontal5.txt
+  *  filename = horizontal25.txt
+==> passed
+
+Test 2b: Random horizontal line segments
+  *   1 random horizontal line segment
+  *   5 random horizontal line segments
+  *  10 random horizontal line segments
+  *  15 random horizontal line segments
+==> passed
+
+Test 3a: Points from a file with vertical line segments
+  *  filename = vertical5.txt
+  *  filename = vertical25.txt
+==> passed
+
+Test 3b: Random vertical line segments
+  *   1 random vertical line segment
+  *   5 random vertical line segments
+  *  10 random vertical line segments
+  *  15 random vertical line segments
+==> passed
+
+Test 4a: Points from a file with no line segments
+  *  filename = random23.txt
+  *  filename = random38.txt
+==> passed
+
+Test 4b: Random points with no line segments
+  *   5 random points
+  *  10 random points
+  *  20 random points
+  *  50 random points
+==> passed
+
+Test 5: Points from a file with fewer than 4 points
+  *  filename = input1.txt
+  *  filename = input2.txt
+  *  filename = input3.txt
+==> passed
+
+Test 6: Check for dependence on either compareTo() or compare()
+        returning { -1, +1, 0 } instead of { negative integer,
+        positive integer, zero }
+  *  filename = equidistant.txt
+  *  filename = input40.txt
+  *  filename = input48.txt
+==> passed
+
+Test 7: Check for fragile dependence on return value of toString()
+  *  filename = equidistant.txt
+  *  filename = input40.txt
+  *  filename = input48.txt
+==> passed
+
+Test 8: Random line segments, none vertical or horizontal
+  *   1 random line segment
+  *   5 random line segments
+  *  10 random line segments
+  *  15 random line segments
+==> passed
+
+Test 9: Random line segments
+  *   1 random line segment
+  *   5 random line segments
+  *  10 random line segments
+  *  15 random line segments
+==> passed
+
+Test 10: Check that data type is immutable by testing whether each method
+        returns the same value, regardless of any intervening operations
+  *  input8.txt
+  *  equidistant.txt
+==> passed
+
+Test 11: Check that data type does not mutate the constructor argument
+  *  input8.txt
+  *  equidistant.txt
+==> passed
+
+Test 12: numberOfSegments() is consistent with segments()
+  *  filename = input8.txt
+  *  filename = equidistant.txt
+  *  filename = input40.txt
+  *  filename = input48.txt
+  *  filename = horizontal5.txt
+  *  filename = vertical5.txt
+  *  filename = random23.txt
+==> passed
+
+Test 13: Throws exception either if argument to constructor is null
+         or if any entry in array is null
+  *  argument is null
+  *  Point[] of length 10, number of null entries = 1
+  *  Point[] of length 10, number of null entries = 10
+  *  Point[] of length 4, number of null entries = 1
+  *  Point[] of length 3, number of null entries = 1
+  *  Point[] of length 2, number of null entries = 1
+  *  Point[] of length 1, number of null entries = 1
+==> passed
+
+Test 14: Check that the constructor throws an exception if duplicate points
+  *  50 points
+  *  25 points
+  *  5 points
+  *  4 points
+  *  3 points
+  *  2 points
+==> passed
+
+
+Total: 17/17 tests passed!
+
+
+================================================================
+
+Testing methods in FastCollinearPoints
+*-----------------------------------------------------------
+Running 21 total tests.
+
+The inputs satisfy the following conditions:
+  - no duplicate points
+  - all x- and y-coordinates between 0 and 32,767
+
+Test 1: Points from a file
+  *  filename = input8.txt
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.file(TestFastCollinearPoints.java:154)
+     TestFastCollinearPoints.test1(TestFastCollinearPoints.java:159)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:770)
+
+  *  filename = equidistant.txt
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.file(TestFastCollinearPoints.java:154)
+     TestFastCollinearPoints.test1(TestFastCollinearPoints.java:160)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:770)
+
+  *  filename = input40.txt
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.file(TestFastCollinearPoints.java:154)
+     TestFastCollinearPoints.test1(TestFastCollinearPoints.java:161)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:770)
+
+  *  filename = input48.txt
+     -  segments() contains the same segment more than once
+     -  segment 1: (18000, 23000) -> (17000, 30000)
+     -  segment 2: (18000, 23000) -> (17000, 30000)
+
+     -  segments() contains a subsegment of a segment in reference solution
+     -  student   segment 9: (9000, 26000) -> (18000, 26000)
+     -  reference segment 1: (1000, 26000) -> (9000, 26000) -> (11000, 26000) -> (18000, 26000)
+
+     -  student   solution has 24 non-null entries
+     -  reference solution has 6 non-null entries
+     -  24 extra entries in student solution, including: (19000, 28000) -> (17000, 30000)
+     -  6 missing entries in student solution, including: (1000, 26000) -> (9000, 26000) -> (11000, 26000) -> (18000, 26000)
+
+  *  filename = input299.txt
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.file(TestFastCollinearPoints.java:154)
+     TestFastCollinearPoints.test1(TestFastCollinearPoints.java:163)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:770)
+
+==> FAILED
+
+Test 2a: Points from a file with horizontal line segments
+  *  filename = horizontal5.txt
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.file(TestFastCollinearPoints.java:154)
+     TestFastCollinearPoints.test2a(TestFastCollinearPoints.java:169)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:773)
+
+  *  filename = horizontal25.txt
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.file(TestFastCollinearPoints.java:154)
+     TestFastCollinearPoints.test2a(TestFastCollinearPoints.java:170)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:773)
+
+  *  filename = horizontal50.txt
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.file(TestFastCollinearPoints.java:154)
+     TestFastCollinearPoints.test2a(TestFastCollinearPoints.java:171)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:773)
+
+  *  filename = horizontal75.txt
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.file(TestFastCollinearPoints.java:154)
+     TestFastCollinearPoints.test2a(TestFastCollinearPoints.java:172)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:773)
+
+  *  filename = horizontal100.txt
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.file(TestFastCollinearPoints.java:154)
+     TestFastCollinearPoints.test2a(TestFastCollinearPoints.java:173)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:773)
+
+==> FAILED
+
+Test 2b: Random horizontal line segments
+  *   1 random horizontal line segment
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.horizontalSegments(TestFastCollinearPoints.java:185)
+     TestFastCollinearPoints.test2b(TestFastCollinearPoints.java:227)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:776)
+
+     -  failed on trial 1 of 500
+     4
+     14744  1051
+     18375  1051
+     11635  1051
+     11997  1051
+
+  *   5 random horizontal line segments
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.horizontalSegments(TestFastCollinearPoints.java:185)
+     TestFastCollinearPoints.test2b(TestFastCollinearPoints.java:228)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:776)
+
+     -  failed on trial 1 of 250
+     20
+     16736 16388
+      1609  3990
+     15342  8123
+     10693  8023
+      5374  3990
+      9265 17245
+     12173  8123
+      5391  8023
+      3780  8023
+     10641  3990
+     14330  8123
+      9238 16388
+     12280 16388
+      4227  8123
+     11024  8023
+     12161 17245
+     19583 17245
+     18191 16388
+     12080 17245
+      4596  3990
+
+  *  10 random horizontal line segments
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.horizontalSegments(TestFastCollinearPoints.java:185)
+     TestFastCollinearPoints.test2b(TestFastCollinearPoints.java:229)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:776)
+
+     -  failed on trial 1 of 50
+
+  *  15 random horizontal line segments
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.horizontalSegments(TestFastCollinearPoints.java:185)
+     TestFastCollinearPoints.test2b(TestFastCollinearPoints.java:230)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:776)
+
+     -  failed on trial 1 of 5
+
+==> FAILED
+
+Test 3a: Points from a file with vertical line segments
+  *  filename = vertical5.txt
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.file(TestFastCollinearPoints.java:154)
+     TestFastCollinearPoints.test3a(TestFastCollinearPoints.java:236)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:779)
+
+  *  filename = vertical25.txt
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.file(TestFastCollinearPoints.java:154)
+     TestFastCollinearPoints.test3a(TestFastCollinearPoints.java:237)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:779)
+
+  *  filename = vertical50.txt
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.file(TestFastCollinearPoints.java:154)
+     TestFastCollinearPoints.test3a(TestFastCollinearPoints.java:238)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:779)
+
+  *  filename = vertical75.txt
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.file(TestFastCollinearPoints.java:154)
+     TestFastCollinearPoints.test3a(TestFastCollinearPoints.java:239)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:779)
+
+  *  filename = vertical100.txt
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.file(TestFastCollinearPoints.java:154)
+     TestFastCollinearPoints.test3a(TestFastCollinearPoints.java:240)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:779)
+
+==> FAILED
+
+Test 3b: Random vertical line segments
+  *   1 random vertical line segment
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.verticalSegments(TestFastCollinearPoints.java:209)
+     TestFastCollinearPoints.test3b(TestFastCollinearPoints.java:246)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:782)
+
+     -  failed on trial 1 of 500
+     4
+     13543  8648
+     13543 14483
+     13543 20482
+     13543  5124
+
+  *   5 random vertical line segments
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.verticalSegments(TestFastCollinearPoints.java:209)
+     TestFastCollinearPoints.test3b(TestFastCollinearPoints.java:247)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:782)
+
+     -  failed on trial 1 of 250
+     20
+      1160  9086
+     11479 15008
+     19357 19506
+      1160  4649
+     11479  5072
+     19729  7314
+      1132  2796
+      1160  7840
+     19729  2412
+      1132 11125
+     19357 18390
+     19729 14981
+     19729  3971
+      1132 12881
+     19357 14332
+     19357  6892
+      1132  3177
+     11479 20976
+     11479  2842
+      1160 14806
+
+  *  10 random vertical line segments
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.verticalSegments(TestFastCollinearPoints.java:209)
+     TestFastCollinearPoints.test3b(TestFastCollinearPoints.java:248)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:782)
+
+     -  failed on trial 1 of 50
+
+  *  15 random vertical line segments
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.verticalSegments(TestFastCollinearPoints.java:209)
+     TestFastCollinearPoints.test3b(TestFastCollinearPoints.java:249)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:782)
+
+     -  failed on trial 1 of 5
+
+==> FAILED
+
+Test 4a: Points from a file with no line segments
+  *  filename = random23.txt
+  *  filename = random38.txt
+  *  filename = random91.txt
+  *  filename = random152.txt
+==> passed
+
+Test 4b: Random points with no line segments
+  *   5 random points
+  *  10 random points
+  *  20 random points
+  *  50 random points
+==> passed
+
+Test 5a: Points from a file with 5 or more on some line segments
+  *  filename = input9.txt
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.file(TestFastCollinearPoints.java:154)
+     TestFastCollinearPoints.test5a(TestFastCollinearPoints.java:296)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:791)
+
+  *  filename = input10.txt
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.file(TestFastCollinearPoints.java:154)
+     TestFastCollinearPoints.test5a(TestFastCollinearPoints.java:297)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:791)
+
+  *  filename = input20.txt
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.file(TestFastCollinearPoints.java:154)
+     TestFastCollinearPoints.test5a(TestFastCollinearPoints.java:298)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:791)
+
+  *  filename = input50.txt
+     -  segments() contains the same segment more than once
+     -  segment 1: (18000, 23000) -> (17000, 30000)
+     -  segment 2: (18000, 23000) -> (17000, 30000)
+
+     -  segments() contains a subsegment of a segment in reference solution
+     -  student   segment 19: (1000, 26000) -> (9000, 26000)
+     -  reference segment 1: (1000, 26000) -> (9000, 26000) -> (11000, 26000) -> (18000, 26000)
+
+     -  student   solution has 27 non-null entries
+     -  reference solution has 7 non-null entries
+     -  26 extra entries in student solution, including: (9000, 29000) -> (18000, 30000)
+     -  6 missing entries in student solution, including: (1000, 26000) -> (9000, 26000) -> (11000, 26000) -> (18000, 26000)
+
+  *  filename = input80.txt
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastCollinearPoints.java:53)
+     TestFastCollinearPoints.testSegments(TestFastCollinearPoints.java:112)
+     TestFastCollinearPoints.file(TestFastCollinearPoints.java:154)
+     TestFastCollinearPoints.test5a(TestFastCollinearPoints.java:300)
+     TestFastCollinearPoints.main(TestFastCollinearPoints.java:791)
+
+  *  filename = input300.txt
+     java.lang.IllegalArgumentException: points are not ordered according to natural order
+
+     LineSegment226.<init>(LineSegment226.java:49)
+     LineSegment.toLineSegment226(LineSegment.java:40)
+     TestFastCollinearPoints.toLineSegments226(TestFastColli
+
+...
+
+Warning: the grading output was truncated due to excessive length.
+Typically, this is becasue you have a method that has an unanticipated side effect
+(such as printing to standard output or throwing an exception).
