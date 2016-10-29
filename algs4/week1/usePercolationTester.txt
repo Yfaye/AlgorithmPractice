@@ -11,3 +11,8 @@ javac -Xlint -cp C:\Java\stdlib.jar;C:\Java\algs4.jar;.\ Board.java
 java -cp C:\Java\stdlib.jar;C:\Java\algs4.jar;.\;%classpath% Board puzzle3x3-12.txt
 
 javac -Xlint -cp C:\Java\stdlib.jar;C:\Java\algs4.jar;.\ Solver.java
+java -cp C:\Java\stdlib.jar;C:\Java\algs4.jar;.\;%classpath% Solver puzzle3x3-12.txt
+
+cd c:/Fei/AlgorithmPractice/algs4/week4/8puzzle
+javac -Xlint -cp C:\Java\stdlib.jar;C:\Java\algs4.jar;.\ PuzzleChecker.java
+java -cp C:\Java\stdlib.jar;C:\Java\algs4.jar;.\;%classpath% PuzzleChecker puzzle*.txt
