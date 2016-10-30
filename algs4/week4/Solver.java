@@ -13,6 +13,7 @@ import java.lang.StringBuilder;
 import java.util.NoSuchElementException;
 import edu.princeton.cs.algs4.MinPQ;
 import edu.princeton.cs.algs4.Queue;
+import edu.princeton.cs.algs4.Stack;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
@@ -51,7 +52,7 @@ public class Solver {
             searchNode a = iniGameTree.delMin();
             searchNode b = twGameTree.delMin();
 
-            result.enqueue(a.curBoard);
+            //result.enqueue(a.curBoard);
             for (Board nb : a.curBoard.neighbors()) {
                 if ((a.pre != null) && (nb.equals(a.pre.curBoard))) continue;
                 iniGameTree.insert(new searchNode(nb, a.curMoves + 1, a));
@@ -64,19 +65,39 @@ public class Solver {
             }
         }
 
-        result.enqueue(iniGameTree.min().curBoard);
+        //result.enqueue(iniGameTree.min().curBoard);
         //shadow.enqueue(twGameTree.min().curBoard);
+        Stack<Board> resultStack = new Stack<Board>();
+
 
         if (iniGameTree.min().curBoard.isGoal() == true) {
             solved = true;
             moves = iniGameTree.min().curMoves;
+
+            searchNode last = iniGameTree.min();
+            searchNode prev = last.pre;
+
+            while(prev != null) {
+                resultStack.push(last.curBoard);
+                last = prev;
+                prev = last.pre;
+            }
+
+            resultStack.push(last.curBoard);
+
+            while(!resultStack.isEmpty()) {
+                result.enqueue(resultStack.pop());
+            }
+
         } else {
             solved = false;
             moves = -1;
+            result = null;
         }
 
         iniGameTree = null;
         twGameTree = null;
+        resultStack = null;
     }
 
     /**
@@ -155,26 +176,26 @@ public class Solver {
     }
 
     //solve a slider puzzle
-    public static void main(String[] args) {
-        // create initial board from file
-        In in = new In(args[0]);
-        int n = in.readInt();
-        int[][] blocks = new int[n][n];
-        for (int i = 0; i < n; i++)
-            for (int j = 0; j < n; j++)
-                blocks[i][j] = in.readInt();
-        Board initial = new Board(blocks);
+    // public static void main(String[] args) {
+    //     // create initial board from file
+    //     In in = new In(args[0]);
+    //     int n = in.readInt();
+    //     int[][] blocks = new int[n][n];
+    //     for (int i = 0; i < n; i++)
+    //         for (int j = 0; j < n; j++)
+    //             blocks[i][j] = in.readInt();
+    //     Board initial = new Board(blocks);
 
-        // solve the puzzle
-        Solver solver = new Solver(initial);
+    //     // solve the puzzle
+    //     Solver solver = new Solver(initial);
 
-        // print solution to standard output
-        if (!solver.isSolvable())
-            StdOut.println("No solution possible");
-        else {
-            StdOut.println("Minimum number of moves = " + solver.moves());
-            for (Board board : solver.solution())
-                StdOut.println(board);
-        }       
-    }
+    //     // print solution to standard output
+    //     if (!solver.isSolvable())
+    //         StdOut.println("No solution possible");
+    //     else {
+    //         StdOut.println("Minimum number of moves = " + solver.moves());
+    //         for (Board board : solver.solution())
+    //             StdOut.println(board);
+    //     }       
+    // }
 }
