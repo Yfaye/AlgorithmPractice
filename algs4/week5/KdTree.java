@@ -1,9 +1,9 @@
 /******************************************************************************
- *  Compilation:  javac PointSET.java
- *  Execution:    java PointSET filename1.txt
- *  Dependencies: java.util.TreeSet;
+ *  Compilation:  javac KdTree.java
+ *  Execution:    java KdTree filename1.txt
+ *  Dependencies: Point2D.java RectHV.java
  *
- *  This program creates an initial PointSET from an n-by-n array of blocks.
+ *  This program creates an initial KdTree from an n-by-n array of blocks.
  *
  ******************************************************************************/
 
@@ -17,19 +17,19 @@ import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.StdDraw;
 import edu.princeton.cs.algs4.In;
 /**
- *  The {@code PointSET} class creates mutable data type that 
+ *  The {@code KdTree} class creates mutable data type that 
  *  represents a set of points in the unit square. 
  *  @author Fei Yan
  */
 
-public class PointSET {
+public class KdTree {
    private TreeSet<Point2D> s;
 
    /**
     * construct an empty set of points
     * inserted points would be ordered by its x-ordinate;
     */   
-   public PointSET() {
+   public KdTree() {
       s = new TreeSet<Point2D>(Point2D.X_ORDER);
    }
 
@@ -115,37 +115,5 @@ public class PointSET {
 
    // unit testing of the methods (optional) 
    public static void main(String[] args) {
-        String filename = args[0];
-        In in = new In(filename);
-
-        StdDraw.enableDoubleBuffering();
-
-        // initialize the data structures with point from standard input
-        PointSET brute = new PointSET();
-        while (!in.isEmpty()) {
-            double x = in.readDouble();
-            double y = in.readDouble();
-            Point2D p = new Point2D(x, y);
-            brute.insert(p);
-        }
-
-        while (true) {
-
-            // the location (x, y) of the mouse
-            double x = StdDraw.mouseX();
-            double y = StdDraw.mouseY();
-            Point2D query = new Point2D(x, y);
-
-            // draw all of the points
-            StdDraw.clear();
-            StdDraw.setPenColor(StdDraw.BLACK);
-            StdDraw.setPenRadius(0.01);
-            brute.draw();
-
-            // draw in red the nearest neighbor (using brute-force algorithm)
-            StdDraw.setPenRadius(0.03);
-            StdDraw.setPenColor(StdDraw.RED);
-            brute.nearest(query).draw();
-        }
    }               
 }
