@@ -1,0 +1,843 @@
+See the Assessment Guide for information on how to interpret this report.
+
+Assessment Summary
+
+Compilation:  PASSED
+Style:        FAILED
+Findbugs:     Potential bugs found.
+API:          PASSED
+
+Correctness:  11/21 tests passed
+Memory:       8/8 tests passed
+Timing:       42/42 tests passed
+
+Aggregate score: 69.05% [Correctness: 65%, Memory: 10%, Timing: 25%, Style: 0%]
+
+Assessment Details
+
+The following files were submitted:
+----------------------------------
+total 20K
+-rw-r--r-- 1 7.2K Nov  5 07:40 KdTree.java
+-rw-r--r-- 1 4.4K Nov  5 07:40 PointSET.java
+-rw-r--r-- 1 3.3K Nov  5 07:40 studentSubmission.zip
+
+
+********************************************************************************
+*          COMPILING                                                           *
+********************************************************************************
+
+
+% javac PointSET.java
+*-----------------------------------------------------------
+
+================================================================
+
+% javac KdTree.java
+*-----------------------------------------------------------
+
+================================================================
+
+
+
+% checkstyle *.java
+*-----------------------------------------------------------
+[ERROR] PointSET.java:11:8: Unused import statement for 'java.util.NoSuchElementException'. [UnusedImports]
+[ERROR] PointSET.java:15:8: Unused import statement for 'edu.princeton.cs.algs4.StdIn'. [UnusedImports]
+[ERROR] PointSET.java:16:8: Unused import statement for 'edu.princeton.cs.algs4.StdOut'. [UnusedImports]
+[ERROR] PointSET.java:18:8: Unused import statement for 'edu.princeton.cs.algs4.In'. [UnusedImports]
+[ERROR] PointSET.java:77:28: Use at least one digit to the left of the decimal point. For example, use the literal '0.5' instead of '.5'. [IllegalTokenText]
+[ERROR] PointSET.java:106:7: Use the primitive type 'double' instead of the wrapper type 'Double'. [IllegalType]
+[ERROR] KdTree.java:10:8: Unused import statement for 'java.util.NoSuchElementException'. [UnusedImports]
+[ERROR] KdTree.java:14:8: Unused import statement for 'edu.princeton.cs.algs4.StdIn'. [UnusedImports]
+[ERROR] KdTree.java:15:8: Unused import statement for 'edu.princeton.cs.algs4.StdOut'. [UnusedImports]
+[ERROR] KdTree.java:17:8: Unused import statement for 'edu.princeton.cs.algs4.In'. [UnusedImports]
+[ERROR] KdTree.java:135:29: '(' is preceded with whitespace. [MethodParamPad]
+[ERROR] KdTree.java:162:6: '//' or '/*' is not followed by whitespace. [IllegalTokenText]
+[ERROR] KdTree.java:202:6: '//' or '/*' is not followed by whitespace. [IllegalTokenText]
+[ERROR] KdTree.java:254:17: '.' is followed by whitespace. [NoWhitespaceAfter]
+[ERROR] KdTree.java:284:6: '//' or '/*' is not followed by whitespace. [IllegalTokenText]
+Checkstyle ends with 15 errors.
+
+================================================================
+
+
+% findbugs *.class
+*-----------------------------------------------------------
+H C IL_INFINITE_RECURSIVE_LOOP IL: There is an apparent infinite recursive loop in KdTree.size()  At KdTree.java:[line 59]
+Warnings generated: 1
+
+================================================================
+
+
+Testing the APIs of your programs.
+*-----------------------------------------------------------
+PointSET:
+
+KdTree:
+
+================================================================
+
+
+******************************************************************************
+*          CORRECTNESS
+******************************************************************************
+
+Testing methods in PointSET
+*-----------------------------------------------------------
+Running 8 total tests.
+
+Test 1: Test size() by inserting N random points
+        (size may be less than N because of duplicates)
+  *  100000 random points in 100000-by-100000 grid
+     -  failed on trial 424 of 100000
+     -  student   size() = 423
+     -  reference size() = 424
+  *  100000 random points in 10000-by-10000 grid
+     -  failed on trial 93 of 100000
+     -  student   size() = 92
+     -  reference size() = 93
+  *  100000 random points in 1000-by-1000 grid
+     -  failed on trial 54 of 100000
+     -  student   size() = 53
+     -  reference size() = 54
+  *  100000 random points in 100-by-100 grid
+     -  failed on trial 25 of 100000
+     -  student   size() = 24
+     -  reference size() = 25
+  *  100000 random points in 10-by-10 grid
+     -  failed on trial 2 of 100000
+     -  student   size() = 1
+     -  reference size() = 2
+==> FAILED
+
+Test 2: Test isEmpty() by checking for N = 0, 1, and 2 points
+  *  zero points
+  *  one point
+  *  two points
+==> passed
+
+Test 3: Insert N random points and check contains() for random query points
+  *  100000 random points in 100000-by-100000 grid
+     -  failed on trial 1 of 100000
+     -  student   contains() = true
+     -  reference contains() = false
+  *  100000 random points in 10000-by-10000 grid
+     -  failed on trial 1 of 100000
+     -  student   contains() = true
+     -  reference contains() = false
+  *  100000 random points in 1000-by-1000 grid
+     -  failed on trial 2 of 100000
+     -  student   contains() = true
+     -  reference contains() = false
+  *  100000 random points in 100-by-100 grid
+  *  100000 random points in 10-by-10 grid
+==> FAILED
+
+Test 4: Insert N random points and check nearest() for random query points
+  *  1000 random points in 100000-by-100000 grid
+     -  failed on trial 31 of 1000
+     -  student   nearest()    = (0.72271, 0.19193)
+     -  reference nearest()    = (0.72271, 0.16603)
+     -  student   distanceTo() = 0.016795931054871597
+     -  reference distanceTo() = 0.009428112218254495
+  *  1000 random points in 10000-by-10000 grid
+     -  failed on trial 5 of 1000
+     -  student   nearest()    = (0.5957, 0.4342)
+     -  reference nearest()    = (0.6038, 0.4411)
+     -  student   distanceTo() = 0.010965856099730626
+     -  reference distanceTo() = 0.0012529964086141795
+  *  1000 random points in 1000-by-1000 grid
+     -  failed on trial 1 of 1000
+     -  student   nearest()    = (0.769, 0.725)
+     -  reference nearest()    = (0.711, 0.737)
+     -  student   distanceTo() = 0.03517101079013798
+     -  reference distanceTo() = 0.024186773244895668
+  *  1000 random points in 100-by-100 grid
+     -  failed on trial 1 of 1000
+     -  student   nearest()    = (0.35, 0.94)
+     -  reference nearest()    = (0.34, 1.0)
+     -  student   distanceTo() = 0.0360555127546399
+     -  reference distanceTo() = 0.03162277660168382
+  *  1000 random points in 10-by-10 grid
+     -  failed on trial 2 of 1000
+     -  student   nearest()    = (0.4, 1.0)
+     -  reference nearest()    = (0.4, 0.9)
+     -  student   distanceTo() = 0.09999999999999998
+     -  reference distanceTo() = 0.0
+==> FAILED
+
+Test 5: Insert N random points and check range() for random query rectangles
+  *  1000 random rectangles and points in 100000-by-100000 grid
+     -  failed on trial 410 of 1000
+     -  rectangle query        = [0.1954199999, 0.19542000010000002] x [0.3955799999, 0.3955800001]
+     -  student   range() size = 0
+     -  reference range() size = 1
+  *  1000 random rectangles and points in 10000-by-10000 grid
+     -  failed on trial 7 of 1000
+     -  rectangle query        = [0.4877999999, 0.4878000001] x [0.0083999999, 0.008400000099999999]
+     -  student   range() size = 0
+     -  reference range() size = 1
+  *  1000 random rectangles and points in 1000-by-1000 grid
+     -  failed on trial 1 of 998
+     -  rectangle query        = [0.1089999999, 0.1090000001] x [0.0, 1.0E-10]
+     -  student   range() size = 0
+     -  reference range() size = 1
+  *  1000 random rectangles and points in 100-by-100 grid
+     -  failed on trial 1 of 951
+     -  rectangle query        = [0.1399999999, 0.14000000010000002] x [0.0, 1.0E-10]
+     -  student   range() size = 0
+     -  reference range() size = 1
+  *  1000 random rectangles and points in 10-by-10 grid
+     -  failed on trial 1 of 121
+     -  rectangle query        = [0.0, 1.0E-10] x [0.0, 1.0E-10]
+     -  student   range() size = 0
+     -  reference range() size = 1
+==> FAILED
+
+Test 6: Intermixed sequence of calls to isEmpty(), size(), insert(),
+        contains(), range(), and nearest() with probabilities
+        p1, p2, p3, p4, p5, and p6, respectively
+  *  10000 calls in 10000-by-10000 grid with random points
+     and probabilities 0.05, 0.05, 0.3, 0.2, 0.2, 0.2
+     -  failed on trial 320 of 10000
+     -  student   contains() = true
+     -  reference contains() = false
+  *  10000 calls in 1000-by-1000 grid with random points
+     and probabilities 0.05, 0.05, 0.3, 0.2, 0.2, 0.2
+     -  failed on trial 132 of 10000
+     -  student   contains() = true
+     -  reference contains() = false
+  *  10000 calls in 100-by-100 grid with random points
+     and probabilities 0.05, 0.05, 0.3, 0.2, 0.2, 0.2
+     -  failed on trial 65 of 10000
+     -  student   contains() = true
+     -  reference contains() = false
+  *  10000 calls in 10-by-10 grid with random points
+     and probabilities 0.05, 0.05, 0.3, 0.2, 0.2, 0.2
+     -  failed on trial 20 of 10000
+     -  student   contains() = true
+     -  reference contains() = false
+  *  10000 calls in 1-by-1 grid with random points
+     and probabilities 0.05, 0.05, 0.3, 0.2, 0.2, 0.2
+     -  failed on trial 6 of 10000
+     -  student   contains() = true
+     -  reference contains() = false
+==> FAILED
+
+Test 7: Intermixed sequence of calls to isEmpty(), size(), insert(),
+        contains(), range(), and nearest() with probabilities
+        p1, p2, p3=0, p4, p5, and p6, respectively
+        (data structure with 0 points)
+  *  1000 calls in 1000-by-1000 grid with random points
+     and probabilities 0.5, 0.5, 0.0, 0.0, 0.0, 0.0
+  *  1000 calls in 1000-by-1000 grid with random points
+     and probabilities 0.2, 0.2, 0.0, 0.6, 0.0, 0.0
+  *  1000 calls in 1000-by-1000 grid with random points
+     and probabilities 0.2, 0.2, 0.0, 0.0, 0.6, 0.0
+  *  1000 calls in 1000-by-1000 grid with random points
+     and probabilities 0.2, 0.2, 0.0, 0.0, 0.0, 0.6
+  *  1000 calls in 1000-by-1000 grid with random points
+     and probabilities 0.2, 0.2, 0.0, 0.2, 0.2, 0.2
+==> passed
+
+Test 8: Test whether two PointSET objects can be created at the same time
+==> passed
+
+
+Total: 3/8 tests passed!
+
+
+================================================================
+
+Testing methods in KdTree
+*-----------------------------------------------------------
+In the tests below, we consider three classes of points and rectangles.
+
+  *  Distinct points: no two points (or rectangles) share both an
+     x-coordinate and a y-coordinate
+  *  General points: no restrictions on the x-coordinates or y-coordinates
+     of the points (or rectangles)
+
+A point in an M-by-M grid means that it is of the form (i/M, j/M),
+where i and j are integers between 0 and M
+
+Running 13 total tests.
+
+Test 1a: Insert N distinct points and check size() after each insertion
+  *  100000 random distinct points in 100000-by-100000 grid
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+  *  100000 random distinct points in 10000-by-10000 grid
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+  *  100000 random distinct points in 1000-by-1000 grid
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+  *  10000 random distinct points in 100-by-100 grid
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+  *  100 random distinct points in 10-by-10 grid
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+  *  1 random distinct points in 1-by-1 grid
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+==> FAILED
+
+Test 1b: Insert N points and check size() after each insertion
+  *  100000 random general points in 100000-by-100000 grid
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+  *  100000 random general points in 10000-by-10000 grid
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+  *  100000 random general points in 1000-by-1000 grid
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+  *  100000 random general points in 100-by-100 grid
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+  *  100000 random general points in 10-by-10 grid
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+  *  10 random general points in 1-by-1 grid
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+==> FAILED
+
+Test 2: Test isEmpty() by checking that it returns the right results for 0, 1, and 2 points
+  *  zero points
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+==> FAILED
+
+Test 3a: Insert N distinct points and call contains() with random query points
+  *  100000 random distinct points in 100000-by-100000 grid
+  *  100000 random distinct points in 10000-by-10000 grid
+  *  100000 random distinct points in 1000-by-1000 grid
+  *  10000 random distinct points in 100-by-100 grid
+  *  100 random distinct points in 10-by-10 grid
+  *  1 random distinct points in 1-by-1 grid
+==> passed
+
+Test 3b: Insert N points and call contains() with random query points
+  *  10000 random general points in 1000-by-1000 grid
+  *  10000 random general points in 100-by-100 grid
+  *  10000 random general points in 10-by-10 grid
+  *  10000 random general points in 1-by-1 grid
+==> passed
+
+Test 4: Test whether two KdTree objects can be created at the same time
+==> passed
+
+Test 5a: Insert N distinct points and call range() for random query rectangles
+  *  4000 random rectangles and 4000 distinct points in 100000-by-100000 grid
+  *  4000 random rectangles and 4000 distinct points in 10000-by-10000 grid
+  *  4000 random rectangles and 4000 distinct points in 1000-by-1000 grid
+  *  4000 random rectangles and 4000 distinct points in 100-by-100 grid
+  *  40 random rectangles and 40 distinct points in 10-by-10 grid
+  *  1 random rectangles and 1 distinct points in 1-by-1 grid
+==> passed
+
+Test 5b: Insert N points and call range() for random query rectangles
+  *  4000 random rectangles and 4000 random general points in 10000-by-10000 grid
+  *  4000 random rectangles and 4000 random general points in 1000-by-1000 grid
+  *  4000 random rectangles and 4000 random general points in 100-by-100 grid
+  *  4000 random rectangles and 4000 random general points in 10-by-10 grid
+  *  4000 random rectangles and 4000 random general points in 1-by-1 grid
+==> passed
+
+Test 5c: Insert N points and call range() for tiny
+rectangles enclosing each point.
+  *  4000 tiny rectangles and 4000 points in 100000-by-100000 grid
+  *  4000 tiny rectangles and 4000 points in 10000-by-10000 grid
+  *  4000 tiny rectangles and 4000 points in 1000-by-1000 grid
+  *  4000 tiny rectangles and 4000 points in 100-by-100 grid
+  *  4000 tiny rectangles and 4000 points in 10-by-10 grid
+==> passed
+
+Test 6a: Insert N distinct points and call nearest() with random query points
+  *  50000 random general points in 100000-by-100000 grid
+  *  50000 random general points in 10000-by-10000 grid
+  *  50000 random general points in 1000-by-1000 grid
+  *  50000 random general points in 100-by-100 grid
+  *  50000 random general points in 10-by-10 grid
+==> passed
+
+Test 6b: Insert N points and call nearest() with random query points
+  *  10000 random general points in 1000-by-1000 grid
+  *  10000 random general points in 100-by-100 grid
+  *  10000 random general points in 10-by-10 grid
+==> passed
+
+Test 7: test intermixed sequence of calls to isEmpty(), size(), insert(),
+        contains(), range(), and nearest() with probabilities
+        p1, p2, p3, p4, p5, and p6, respectively
+  *  20000 calls in 100000-by-100000 grid with probabilties 0.05, 0.05, 0.3, 0.1, 0.2, 0.2
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+  *  20000 calls in 10000-by-10000 grid with probabilties 0.05, 0.05, 0.3, 0.1, 0.2, 0.2
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+  *  20000 calls in 1000-by-1000 grid with probabilties 0.05, 0.05, 0.3, 0.1, 0.2, 0.2
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+  *  20000 calls in 100-by-100 grid with probabilties 0.05, 0.05, 0.3, 0.1, 0.2, 0.2
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+  *  20000 calls in 10-by-10 grid with probabilties 0.05, 0.05, 0.3, 0.1, 0.2, 0.2
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+  *  20000 calls in 1-by-1 grid with probabilties 0.05, 0.05, 0.3, 0.1, 0.2, 0.2
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+==> FAILED
+
+Test 8: test intermixed sequence of calls to isEmpty(), size(), insert(),
+        contains(), range(), and nearest() with probabilities
+        p1, p2, p3 = 0, p4, p5, and p6, respectively
+        (a data structure with 0 points)
+  *  1000 calls in 1000-by-1000 grid with probabilties 0.5, 0.5, 0.0, 0.0, 0.0, 0.0
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+  *  1000 calls in 1000-by-1000 grid with probabilties 0.2, 0.2, 0.0, 0.6, 0.0, 0.0
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+  *  1000 calls in 1000-by-1000 grid with probabilties 0.2, 0.2, 0.0, 0.0, 0.6, 0.0
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+  *  1000 calls in 1000-by-1000 grid with probabilties 0.2, 0.2, 0.0, 0.0, 0.0, 0.6
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+  *  1000 calls in 1000-by-1000 grid with probabilties 0.2, 0.2, 0.0, 0.2, 0.2, 0.2
+     java.lang.StackOverflowError
+
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     ...
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+     KdTree.size(KdTree.java:59)
+
+==> FAILED
+
+
+Total: 8/13 tests passed!
+
+
+================================================================
+
+******************************************************************************
+*          MEMORY
+******************************************************************************
+
+Computing memory of Point2D
+*-----------------------------------------------------------
+Memory of Point2D object = 32 bytes
+================================================================
+
+
+
+Computing memory of RectHV
+*-----------------------------------------------------------
+Memory of RectHV object = 48 bytes
+================================================================
+
+
+
+Computing memory of KdTree
+*-----------------------------------------------------------
+Running 8 total tests.
+
+Memory usage of a KdTree with N points (including Point2D and RectHV objects).
+Maximum allowed memory is 312N + 192 bytes.
+
+                 N       student (bytes)    reference (bytes)
+--------------------------------------------------------------
+=> passed        1          160                160
+=> passed        2          288                288
+=> passed        5          672                672
+=> passed       10         1312               1312
+=> passed       25         3232               3232
+=> passed      100        12832              12832
+=> passed      400        51232              51232
+=> passed      800       102432             102432
+==> 8/8 tests passed
+
+Total: 8/8 tests passed!
+
+Estimated student   memory (bytes) = 128.00 n + 32.00  (R^2 = 1.000)
+Estimated reference memory (bytes) = 128.00 n + 32.00  (R^2 = 1.000)
+================================================================
+
+
+
+******************************************************************************
+*          TIMING
+******************************************************************************
+
+Timing PointSET
+*-----------------------------------------------------------
+Running 14 total tests.
+
+
+Inserting N points into a PointSET.
+
+               N      ops per second
+----------------------------------------
+=> passed   160000    1254799         
+=> passed   320000    1158951         
+=> passed   640000     972466         
+=> passed  1280000     820666         
+==> 4/4 tests passed
+
+Performing contains() queries after inserting N points into a PointSET.
+
+               N      ops per second
+----------------------------------------
+=> passed   160000     436120         
+=> passed   320000     403747         
+=> passed   640000     384267         
+=> passed  1280000     355630         
+==> 4/4 tests passed
+
+Performing range() queries after inserting N points into a PointSET.
+
+               N      ops per second
+----------------------------------------
+=> passed    10000       4842         
+=> passed    20000       2232         
+=> passed    40000       1033         
+==> 3/3 tests passed
+
+Performing nearest() queries after inserting N points into a PointSET.
+
+               N      ops per second
+----------------------------------------
+=> passed    10000       4334         
+=> passed    20000       2663         
+=> passed    40000        962         
+==> 3/3 tests passed
+
+Total: 14/14 tests passed!
+
+================================================================
+
+
+
+Timing KdTree
+*-----------------------------------------------------------
+Running 28 total tests.
+
+
+Inserting N points into a 2d tree. The table gives the average number of calls to methods
+in RectHV and Point per call to insert().
+
+                                                                                                Point2D
+               N      ops per second       RectHV()           x()               y()             equals()
+----------------------------------------------------------------------------------------------------------------
+=> passed   160000     785854               1.0              22.6              21.6              21.6         
+=> passed   320000     866456               1.0              23.0              22.0              22.0         
+=> passed   640000     907316               1.0              24.5              23.5              23.5         
+=> passed  1280000     760418               1.0              26.6              25.6              25.6         
+==> 4/4 tests passed
+
+Performing contains() queries after inserting N points into a 2d tree. The table gives
+the average number of calls to methods in RectHV and Point per call to contain().
+
+                                                                               Point2D
+               N      ops per second       x()               y()               equals()
+-----------------------------------------------------------------------------------------------
+=> passed    10000     516377              18.5              17.5              18.0         
+=> passed    20000     525721              19.7              18.7              19.2         
+=> passed    40000     483760              21.8              20.8              21.3         
+=> passed    80000     438638              22.0              21.0              21.5         
+=> passed   160000  
+
+...
+
+Warning: the grading output was truncated due to excessive length.
+Typically, this is becasue you have a method that has an unanticipated side effect
+(such as printing to standard output or throwing an exception).
