@@ -28,7 +28,7 @@ class MyHashMap {
     private static final int BASE = 769;
     private LinkedList[] data;
     
-    // initilize the data structure in constructor
+    // initialize the data structure in constructor
     public MyHashMap() {
         data = new LinkedList[BASE];
         for (int i = 0; i < BASE; i++) {
@@ -88,4 +88,66 @@ class MyHashMap {
  * obj.put(key,value);
  * int param_2 = obj.get(key);
  * obj.remove(key);
+ */
+
+
+class MyHashSet {
+    private static int BASE = 769;
+    private LinkedList[] data;
+
+    // initialize the data structure in constructor
+    public MyHashSet() {
+        data = new LinkedList[BASE];
+        for (int i = 0; i < BASE; i++) {
+            data[i] = new LinkedList<Integer>();
+        }
+    }
+    
+    public void add(int key) {
+        int k = hash(key);
+        Iterator<Integer> iterator = data[k].iterator();
+        while (iterator.hasNext()) {
+            int element = iterator.next();
+            if (element == key) {
+                return;
+            }
+        }
+        data[k].offerLast(key);
+    }
+    
+    public void remove(int key) {
+        int k = hash(key);
+        Iterator<Integer> iterator = data[k].iterator();
+        while (iterator.hasNext()) {
+            Integer element = iterator.next();
+            if (element == key) {
+                data[k].remove(element);
+                return;
+            }
+        }
+    }
+    
+    public boolean contains(int key) {
+        int k = hash(key);
+        Iterator<Integer> iterator = data[k].iterator();
+        while (iterator.hasNext()) {
+            Integer element = iterator.next();
+            if (element == key) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    private static int hash(int key) {
+        return key % BASE;
+    }
+}
+
+/**
+ * Your MyHashSet object will be instantiated and called as such:
+ * MyHashSet obj = new MyHashSet();
+ * obj.add(key);
+ * obj.remove(key);
+ * boolean param_3 = obj.contains(key);
  */
