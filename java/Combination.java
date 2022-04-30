@@ -16,7 +16,7 @@ class Solution {
             res.add(new LinkedList(path));
         }
         
-        for (int i = startIndex; i <= n; i++ ) {
+        for (int i = startIndex; i <= n; i++ ) {  // prune skill:  i <= n - (k - path.size()) + 1
             path.add(i);
             
             backtrack(n, k, i+1);
